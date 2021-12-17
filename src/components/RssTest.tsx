@@ -64,6 +64,7 @@ const RssTest = (props: Props) => {
             type="text"
             onChange={inputHandler}
             value={rssUrl}
+            className=" mb-2 border-4 border-gray-400" 
           />
         </div>
         <input type="submit" />
