@@ -68,7 +68,6 @@ const RssTest = (props: Props) => {
         </div>
         <input type="submit" />
       </form>
-      asdfasdf
       
       {items.map((item) => {
         return (
