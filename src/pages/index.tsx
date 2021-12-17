@@ -1,8 +1,13 @@
+
+import RssTest from "components/RssTest";
+
+
 export default function Home() {
   return (
     <>
-      <main className="container min-h-screen grid pt-48 md:pt-0 md:place-items-center">
-        Hi RSS
+      <main className="container min-h-screen grid ">
+        Hi RSS  
+        <RssTest  />
       </main>
     </>
   );
