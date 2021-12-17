@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 interface Props {}
 
 interface IArticle {
+  id: string;
   title?: string;
   link?: string;
   pubDate?: string;
@@ -15,10 +17,17 @@ const podcastRSS =
 const joshRSS =
   "https://www.joshwcomeau.com/rss.xml";
 const RssTest = (props: Props) => {
-  const [rssUrl, setRssUrl] = useState(joshRSS);
+  const [rssUrl, setRssUrl] = useState(podcastRSS);
   const [items, setItems] = useState<IArticle[]>(
     []
   );
+
+  const decodeString = (str: string) => {
+    str = str.replace(/&lt;/g, "<");
+    str = str.replace(/&gt;/g, ">");
+    str = str.replace(/&amp;/g, "&");
+    return str;
+  };
 
   const parseCDATA = (str: string) => {
     const regex = /<!\[CDATA\[(.*?)\]\]>/g;
@@ -34,11 +43,13 @@ const RssTest = (props: Props) => {
       item.children
     );
 
-    const article: IArticle = {};
+    const article: IArticle = {
+      id: uuidv4(),
+    };
 
     children.forEach((child: Element) => {
       const key = child.tagName.toLowerCase();
-      const value = parseCDATA(child.innerHTML);
+      const value = decodeString(parseCDATA(child.innerHTML));
       article[key] = value;
     });
 
@@ -63,36 +74,10 @@ const RssTest = (props: Props) => {
         "text/xml"
       );
     const items = feed.querySelectorAll("item");
-    const articles = Array.from(items).map(parseItem);
-    
-    // const feedItems = Array.from(items).map(
-    //   (el) => ({
-    //     title:
-    //       parseCDATA(
-    //         el.querySelector("title").innerHTML
-    //       ) || "No title",
-    //     link: parseCDATA(
-    //       el.querySelector("link").innerHTML
-    //     ),
-    //     pubDate: parseCDATA(
-    //       el.querySelector("pubDate").innerHTML
-    //     ),
-    //     description: parseCDATA(
-    //       el.querySelector("description")
-    //         .innerHTML
-    //     ),
-    //     content:
-    //       parseCDATA(
-    //         el.querySelector("content")?.innerHTML
-    //       ) ?? "no content found",
-    //   })
-    // );
-    // console.debug(
-    //   "feedItems>>>",
-    //   feedItems[0].content
-    // );
-    setItems(feedItems);
-
+    const articles =
+      Array.from(items).map(parseItem);
+    setItems(articles);
+    console.debug(articles[0]);
     setRssUrl("");
   };
 
@@ -121,23 +106,29 @@ const RssTest = (props: Props) => {
         return (
           <div
             className="bg-gray-100 p-2 rounded-sm mb-4"
-            key={item.title}
+            key={item.id}
           >
-            <h1>{item.title}</h1>
+            <h1 className="text-3xl font-bold mb-2">
+              {item.title}
+            </h1>
             <article
+              className="text-lg text-gray-500 max-w-2xl"
               dangerouslySetInnerHTML={{
                 __html: item.description,
               }}
-            ></article>
-            {/* <p>{item.author}</p> */}
-            CONTENT:
+            />
             <article
               dangerouslySetInnerHTML={{
-                __html: item.content,
+                __html:
+                  item.content ||
+                  item["content:encoded"],
               }}
               className="whitespace-pre-line"
             />
-            {/* <a href={item.link}>{item.link}</a> */}
+
+            <a href={item.link} target="_blank">
+              Read More &rarr;
+            </a>
           </div>
         );
       })}
