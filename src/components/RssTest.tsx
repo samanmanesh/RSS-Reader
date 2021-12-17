@@ -16,8 +16,13 @@ const podcastRSS =
   "https://feeds.acast.com/public/shows/5ea17537-f11f-4532-8202-294d976b9d5c";
 const joshRSS =
   "https://www.joshwcomeau.com/rss.xml";
+
+const cssTricksRSS =
+  "https://css-tricks.com/feed/";
+
 const RssTest = (props: Props) => {
-  const [rssUrl, setRssUrl] = useState(podcastRSS);
+  const [rssUrl, setRssUrl] =
+    useState(cssTricksRSS);
   const [items, setItems] = useState<IArticle[]>(
     []
   );
@@ -32,9 +37,12 @@ const RssTest = (props: Props) => {
   const parseCDATA = (str: string) => {
     const regex = /<!\[CDATA\[(.*?)\]\]>/g;
     const matches = regex.exec(str);
+
     if (matches) {
+      console.info("matches", matches);
       return matches[1];
     }
+    //console.error("did not match", str);
     return str;
   };
 
@@ -49,7 +57,15 @@ const RssTest = (props: Props) => {
 
     children.forEach((child: Element) => {
       const key = child.tagName.toLowerCase();
-      const value = decodeString(parseCDATA(child.innerHTML));
+      console.debug(
+        key,
+        child.innerHTML,
+        "___",
+        parseCDATA(child.innerHTML)
+      );
+      const value = decodeString(
+        parseCDATA(child.innerHTML)
+      );
       article[key] = value;
     });
 
@@ -111,7 +127,24 @@ const RssTest = (props: Props) => {
             <h1 className="text-3xl font-bold mb-2">
               {item.title}
             </h1>
-            <article
+            <hr className="my-5 block" />
+            {Object.entries(item).map(
+              ([key, value]) => {
+                return (
+                  <div key={key} className="mb-2">
+                    <span className="font-bold">
+                      {key}:{" "}
+                    </span>
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: value,
+                      }}
+                    />
+                  </div>
+                );
+              }
+            )}
+            {/* <article
               className="text-lg text-gray-500 max-w-2xl"
               dangerouslySetInnerHTML={{
                 __html: item.description,
@@ -124,7 +157,7 @@ const RssTest = (props: Props) => {
                   item["content:encoded"],
               }}
               className="whitespace-pre-line"
-            />
+            /> */}
 
             <a href={item.link} target="_blank">
               Read More &rarr;
