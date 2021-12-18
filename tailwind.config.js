@@ -1,8 +1,8 @@
 module.exports = {
-  purge: [
+  content: [
     "./src/components/**/*.{ts,tsx,js,jsx}",
     "./src/pages/**/*.{ts,tsx,js,jsx}",
-  ],
+  ], 
   darkMode: 'class',
   theme: {
     container: {

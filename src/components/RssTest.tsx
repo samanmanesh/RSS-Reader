@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { getRSSFeed } from '../utils/rss.utils';
-import useArticles from '../hooks/useArticles';
+import { getRSSFeed } from "../utils/rss.utils";
+import useArticles from "../hooks/useArticles";
 
 const podcastRSS =
   "https://feeds.acast.com/public/shows/5ea17537-f11f-4532-8202-294d976b9d5c";
@@ -10,48 +10,19 @@ const joshRSS =
 const cssTricksRSS =
   "https://css-tricks.com/feed/";
 
-const RssTest = ():JSX.Element => {
-  const [rssUrl, setRssUrl] = useState(cssTricksRSS);
-  const [items, setItems] = useState<IArticle[]>(
-    []
-  );
-  const {articles,addArticles} = useArticles();
+const RssTest = (): JSX.Element => {
+  const [rssUrl, setRssUrl] =
+    useState(cssTricksRSS);
 
-  // const getRss = async (e) => {
-  //   e.preventDefault();
-  //   const urlRegex =
-  //     /(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/;
-  //   if (!urlRegex.test(rssUrl)) {
-  //     console.error("URL is not valid");
-  //     return;
-  //   }
-  //   const res = await fetch(
-  //     `https://api.allorigins.win/get?url=${rssUrl}`
-  //   );
-  //   const { contents } = await res.json();
-  //   const feed =
-  //     new window.DOMParser().parseFromString(
-  //       contents,
-  //       "text/xml"
-  //     );
-  //   const items = feed.querySelectorAll("item");
+  const { articles, addArticles } = useArticles();
 
-  //   const articles = Array.from(items).map(
-  //     convertItemToArticle
-  //   );
-  //   setItems(articles);
-
-  //   console.debug("articles >>", articles);
-
-  //   setRssUrl("");
-  // };
-
-  const handleGetFeed = async () => {
+  const handleGetFeed = async (e) => {
+    e.preventDefault();
+    console.debug("handleGetFeed >>");
     const results = await getRSSFeed(rssUrl);
-    setItems(results)
     addArticles(results);
     setRssUrl("");
-  }
+  };
 
   const inputHandler = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -75,7 +46,7 @@ const RssTest = ():JSX.Element => {
         <input type="submit" />
       </form>
 
-      {items.map((item) => {
+      {articles.map((item) => {
         return (
           <div
             className="bg-gray-100 p-2 rounded-sm mb-4"

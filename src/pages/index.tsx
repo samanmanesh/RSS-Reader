@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <div className="bg-gray-200 pt-12">
       <main className="container min-h-screen  ">
-        <h1>Hi RSS </h1>
+        
         <RssTest  />
       </main>
     </div>
