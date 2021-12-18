@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { getRSSFeed } from '../utils/rss.utils';
+import useArticles from '../hooks/useArticles';
 
 const podcastRSS =
   "https://feeds.acast.com/public/shows/5ea17537-f11f-4532-8202-294d976b9d5c";
@@ -14,6 +15,7 @@ const RssTest = ():JSX.Element => {
   const [items, setItems] = useState<IArticle[]>(
     []
   );
+  const {articles,addArticles} = useArticles();
 
   // const getRss = async (e) => {
   //   e.preventDefault();
@@ -47,6 +49,7 @@ const RssTest = ():JSX.Element => {
   const handleGetFeed = async () => {
     const results = await getRSSFeed(rssUrl);
     setItems(results)
+    addArticles(results);
     setRssUrl("");
   }
 
