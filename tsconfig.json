@@ -18,7 +18,8 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "downlevelIteration": true,
   },
   "exclude": [
     "node_modules"

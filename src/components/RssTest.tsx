@@ -46,30 +46,34 @@ const RssTest = (props: Props) => {
     return str;
   };
 
-  const parseItem = (item: Element): IArticle => {
-    const children: Element[] = Array.from(
-      item.children
-    );
-
+  const convertItemToArticle = (
+    item: Element
+  ): IArticle => {
     const article: IArticle = {
       id: uuidv4(),
     };
 
-    children.forEach((child: Element) => {
+    for (const child of item.children) {
       const key = child.tagName.toLowerCase();
-      console.debug(
-        key,
-        child.innerHTML,
-        "___",
-        parseCDATA(child.innerHTML)
-      );
       const value = decodeString(
         parseCDATA(child.innerHTML)
       );
       article[key] = value;
-    });
+    }
 
     return article;
+
+    // const children: Element[] = Array.from(
+    //   item.children
+    // );
+
+    // children.forEach((child: Element) => {
+    //   const key = child.tagName.toLowerCase();
+    //   const value = decodeString(
+    //     parseCDATA(child.innerHTML)
+    //   );
+    //   article[key] = value;
+    // });
   };
 
   const getRss = async (e) => {
@@ -89,11 +93,19 @@ const RssTest = (props: Props) => {
         contents,
         "text/xml"
       );
+    console.debug("feed >>", feed);
     const items = feed.querySelectorAll("item");
-    const articles =
-      Array.from(items).map(parseItem);
+    console.debug("items >>", items);
+
+    //const articles = Array.from(items).map(item => convertItemToArticle(item));
+    const articles = Array.from(items).map(
+      convertItemToArticle
+    );
     setItems(articles);
-    console.debug(articles[0]);
+
+    console.debug("articles >>", articles);
+    console.debug("article[0] >>", articles[0]);
+
     setRssUrl("");
   };
 
