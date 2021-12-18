@@ -10,8 +10,7 @@ const cssTricksRSS =
   "https://css-tricks.com/feed/";
 
 const RssTest = ():JSX.Element => {
-  const [rssUrl, setRssUrl] =
-    useState(cssTricksRSS);
+  const [rssUrl, setRssUrl] = useState(cssTricksRSS);
   const [items, setItems] = useState<IArticle[]>(
     []
   );
@@ -56,7 +55,7 @@ const RssTest = ():JSX.Element => {
   ) => {
     setRssUrl(e.target.value);
   };
-  
+
   return (
     <div>
       <form onSubmit={handleGetFeed}>
