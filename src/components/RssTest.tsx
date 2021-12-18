@@ -5,9 +5,9 @@ interface Props {}
 
 interface IArticle {
   id: string;
-  title?: string;
+  title: string;
+  pubdate: Date;
   link?: string;
-  pubDate?: string;
   description?: string;
   content?: string;
 }
@@ -39,7 +39,7 @@ const RssTest = (props: Props) => {
     const matches = regex.exec(str);
 
     if (matches) {
-      console.info("matches", matches);
+      //console.info("matches", matches);
       return matches[1];
     }
     //console.error("did not match", str);
@@ -51,13 +51,21 @@ const RssTest = (props: Props) => {
   ): IArticle => {
     const article: IArticle = {
       id: uuidv4(),
+      title: "",
+      pubdate: new Date(),
     };
 
     for (const child of item.children) {
       const key = child.tagName.toLowerCase();
-      const value = decodeString(
+
+      let value: string | Date = decodeString(
         parseCDATA(child.innerHTML)
       );
+
+      if (key === "pubdate") {
+        value = new Date(value);
+      }
+
       article[key] = value;
     }
 
@@ -93,9 +101,9 @@ const RssTest = (props: Props) => {
         contents,
         "text/xml"
       );
-    console.debug("feed >>", feed);
+    //console.debug("feed >>", feed);
     const items = feed.querySelectorAll("item");
-    console.debug("items >>", items);
+    //console.debug("items >>", items);
 
     //const articles = Array.from(items).map(item => convertItemToArticle(item));
     const articles = Array.from(items).map(
@@ -104,7 +112,7 @@ const RssTest = (props: Props) => {
     setItems(articles);
 
     console.debug("articles >>", articles);
-    console.debug("article[0] >>", articles[0]);
+    //console.debug("article[0] >>", articles[0]);
 
     setRssUrl("");
   };
@@ -115,7 +123,7 @@ const RssTest = (props: Props) => {
     setRssUrl(e.target.value);
   };
   return (
-    <div className="App">
+    <div>
       <form onSubmit={getRss}>
         <div>
           <label> rss url</label>
@@ -147,11 +155,13 @@ const RssTest = (props: Props) => {
                     <span className="font-bold">
                       {key}:{" "}
                     </span>
-                    <span
-                      dangerouslySetInnerHTML={{
-                        __html: value,
-                      }}
-                    />
+                    <div className="prose prose-headings:text-purple-500">
+                      <span
+                        dangerouslySetInnerHTML={{
+                          __html: value,
+                        }}
+                      />
+                    </div>
                   </div>
                 );
               }

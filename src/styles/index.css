@@ -3,6 +3,3 @@
 @import 'tailwindcss/utilities';
 
 
-pre {
-  @apply bg-gray-900 text-yellow-400 p-2 rounded-sm;
-}

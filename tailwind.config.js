@@ -3,6 +3,7 @@ module.exports = {
     "./src/components/**/*.{ts,tsx,js,jsx}",
     "./src/pages/**/*.{ts,tsx,js,jsx}",
   ],
+  darkMode: 'class',
   theme: {
     container: {
       padding: {
@@ -15,5 +16,7 @@ module.exports = {
     },
   },
   variants: {},
-  plugins: [],
+  plugins: [
+    require("@tailwindcss/typography"),
+  ],
 };
