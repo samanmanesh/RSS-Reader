@@ -12,7 +12,7 @@ const cssTricksRSS =
 
 const RssTest = (): JSX.Element => {
   const [rssUrl, setRssUrl] =
-    useState(cssTricksRSS);
+    useState(joshRSS);
 
   const { articles, addArticles } = useArticles();
 

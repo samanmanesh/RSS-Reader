@@ -1,5 +1,6 @@
 
 import RssTest from "components/RssTest";
+import TailwindTemplate from "components/TailwindTemplate";
 import { useEffect } from "react";
 
 
@@ -11,10 +12,12 @@ export default function Home() {
     }
   }, [])
   return (
-    <div className="bg-gray-200 pt-12">
-      <main className="container min-h-screen  ">
+    <div className="bg-gray-200 ">
+      <main className="container   min-h-screen  ">
         
-        <RssTest  />
+        {/* <RssTest  /> */}
+        <TailwindTemplate />
+
       </main>
     </div>
   );
