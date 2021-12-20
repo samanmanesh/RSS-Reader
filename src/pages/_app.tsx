@@ -2,6 +2,7 @@ import Head from "next/head";
 import { AppProps } from "next/app";
 import "styles/index.css";
 import { RecoilRoot } from "recoil";
+import AppLayout from 'components/layout/AppLayout';
 
 function MyApp({
   Component,
@@ -17,7 +18,9 @@ function MyApp({
         />
       </Head>
       <RecoilRoot>
-        <Component {...pageProps} />
+        {/* <AppLayout> */}
+          <Component {...pageProps} />
+        {/* </AppLayout> */}
       </RecoilRoot>
     </>
   );

@@ -1,6 +1,6 @@
 
 import RssTest from "components/RssTest";
-import Sidebar from "components/Sidebar";
+import Sidebar from "components/layout/navigation/Sidebar";
 import TailwindTemplate from "components/TailwindTemplate";
 import { useEffect, useState } from "react";
 
@@ -16,7 +16,6 @@ export default function Home() {
   return (
     <div className="h-full ">
       <main className=" min-h-screen  ">
-        
         {/* <RssTest  /> */}
         <TailwindTemplate  />
         <Sidebar  />

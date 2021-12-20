@@ -17,7 +17,10 @@ import {
   XIcon,
 } from "@heroicons/react/outline";
 import { SearchIcon } from "@heroicons/react/solid";
-import useSidebar from "../hooks/useSidebar";
+import useSidebar from "hooks/useSidebar";
+import { classNames } from "utils/ui.utils";
+import SidebarItem from "./SidebarItem";
+
 const navigation = [
   {
     name: "Dashboard",
@@ -57,10 +60,6 @@ const navigation = [
   },
 ];
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
 const Sidebar = () => {
   const {
     sidebarOpen,
@@ -70,14 +69,6 @@ const Sidebar = () => {
 
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full">
-        <body class="h-full">
-        ```
-      */}
       <Transition.Root
         show={sidebarOpen}
         as={Fragment}
@@ -101,7 +92,7 @@ const Sidebar = () => {
           </Transition.Child>
 
           {/* Nav Sidebar */}
-          <Transition.Child   
+          <Transition.Child
             as={Fragment}
             enter="transition ease-in-out duration-300 transform"
             enterFrom="-translate-x-full"
@@ -138,7 +129,7 @@ const Sidebar = () => {
                   </button>
                 </div>
               </Transition.Child>
-              
+
               {/* Logo */}
               <div className="flex-shrink-0 bg-indigo-500 px-4 flex items-center">
                 <img
@@ -147,32 +138,15 @@ const Sidebar = () => {
                   alt="Workflow"
                 />
               </div>
-              
+
               {/* Navigation Items */}
               <div className="mt-5 bg-yellow-300 flex-1 h-0 overflow-y-auto">
                 <nav className="px-2 space-y-1">
                   {navigation.map((item) => (
-                    <a
+                    <SidebarItem
                       key={item.name}
-                      href={item.href}
-                      className={classNames(
-                        item.current
-                          ? "bg-gray-100 text-gray-900"
-                          : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                        "group rounded-md py-2 px-2 flex items-center text-base font-medium"
-                      )}
-                    >
-                      <item.icon
-                        className={classNames(
-                          item.current
-                            ? "text-gray-500"
-                            : "text-gray-400 group-hover:text-gray-500",
-                          "mr-4 flex-shrink-0 h-6 w-6"
-                        )}
-                        aria-hidden="true"
-                      />
-                      {item.name}
-                    </a>
+                      item={item}
+                    />
                   ))}
                 </nav>
               </div>
@@ -198,27 +172,10 @@ const Sidebar = () => {
           <div className="flex-grow mt-5 flex flex-col">
             <nav className="flex-1 px-2 pb-4 space-y-1">
               {navigation.map((item) => (
-                <a
+                <SidebarItem
                   key={item.name}
-                  href={item.href}
-                  className={classNames(
-                    item.current
-                      ? "bg-gray-100 text-gray-900"
-                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                    "group rounded-md py-2 px-2 flex items-center text-sm font-medium"
-                  )}
-                >
-                  <item.icon
-                    className={classNames(
-                      item.current
-                        ? "text-gray-500"
-                        : "text-gray-400 group-hover:text-gray-500",
-                      "mr-3 flex-shrink-0 h-6 w-6"
-                    )}
-                    aria-hidden="true"
-                  />
-                  {item.name}
-                </a>
+                  item={item}
+                />
               ))}
             </nav>
           </div>
