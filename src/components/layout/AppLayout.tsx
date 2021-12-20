@@ -1,21 +1,27 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement } from "react";
+import Dashboard from "./Dashboard";
+import Headbar from "components/layout/Headbar";
+import Sidebar from "components/layout/navigation/Sidebar";
 
 interface Props {
-  children: React.ReactElement
+  children: React.ReactElement;
 }
 
 export default function AppLayout({
-  children
+  children,
 }: Props): ReactElement {
   return (
-    <div className="flex w-full h-screen">
-      <div className="w-64 h-full bg-red-200">
-        NAVIGATION
+    <div className="bg-indigo-900 min-h-screen ">
+      {/* Dashbord & Profile & sidebar  button wrapper */}
+      <div className=" bg-red-600 ">
+        {/* sidebar button& search & notification &profile dropdown  wrapper */}
+        <Sidebar />
+        <div className="md:pl-64">
+          <Headbar />
+          {children}
+        </div>
+        {/* <Dashboard /> */}
       </div>
-      <main className="w-full">
-        <div className="h-12 w-full bg-blue-200">Search Bar</div>
-        {children}
-      </main>
     </div>
-  )
+  );
 }

@@ -37,41 +37,19 @@ Requires JS
   }
   ```
 */
-import { Fragment, useState } from "react";
-import {
-  Dialog,
-  Menu,
-  Transition,
-} from "@headlessui/react";
-import {
-  BellIcon,
-  CalendarIcon,
-  ChartBarIcon,
-  FolderIcon,
-  HomeIcon,
-  InboxIcon,
-  MenuAlt2Icon,
-  UsersIcon,
-  XIcon,
-} from "@heroicons/react/outline";
-import { SearchIcon } from "@heroicons/react/solid";
-import useSidebar from "hooks/useSidebar";
-import Navbar from "./layout/navigation/Navbar";
-import Dashboard from "./layout/navigation/Dashboard";
 
-const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
-];
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+
+import Headbar from "./layout/Headbar";
+import Dashboard from "./layout/Dashboard";
+
+
+
+
 
 export default function Example() {
   //const [sidebarOpen, setSidebarOpen] = useState(false)
-  const { setSidebarOpen } = useSidebar();
+  
   return (
     <>
       {/*
@@ -87,9 +65,9 @@ export default function Example() {
           {/* Dashbord & Profile & sidebar  button wrapper */}
           <div className="max-w-4xl mx-auto flex flex-col md:px-8 xl:px-0  bg-red-600 ">
             {/* sidebar button& search & notification &profile dropdown  wrapper */}
-            <Navbar />
-
-            <Dashboard />
+            {/* <Headbar /> */}
+      
+            {/* <Dashboard /> */}
           </div>
         </div>
       </div>

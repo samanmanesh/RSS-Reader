@@ -14,12 +14,12 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="h-full ">
-      <main className=" min-h-screen  ">
+    <div className="h-full">
         {/* <RssTest  /> */}
-        <TailwindTemplate  />
-        <Sidebar  />
-      </main>
+        {/* <TailwindTemplate  /> */}
+        {/* <Sidebar  /> */}
+        We are in index
+        
     </div>
   );
 } 

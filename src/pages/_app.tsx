@@ -18,9 +18,9 @@ function MyApp({
         />
       </Head>
       <RecoilRoot>
-        {/* <AppLayout> */}
+        <AppLayout>
           <Component {...pageProps} />
-        {/* </AppLayout> */}
+        </AppLayout>
       </RecoilRoot>
     </>
   );
