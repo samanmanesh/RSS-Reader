@@ -18,6 +18,7 @@ import {
 } from "@heroicons/react/outline";
 import { SearchIcon } from "@heroicons/react/solid";
 import useSidebar from "hooks/useSidebar";
+import { classNames } from "utils/ui.utils";
 
 const userNavigation = [
   { name: "Your Profile", href: "#" },
@@ -25,20 +26,16 @@ const userNavigation = [
   { name: "Sign out", href: "#" },
 ];
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
 interface Props {}
 
-export default function Headbar({}: Props): ReactElement {
+export default function TopBar({}: Props): ReactElement {
   const { setSidebarOpen } = useSidebar();
 
   {
     /* sidebar button& search & notification &profile dropdown  wrapper */
   }
   return (
-    <div className="sticky top-0 z-10 flex-shrink-0 h-16 bg-blue-500 border-b border-gray-200 flex md:px-4">
+    <div className="sticky top-0 z-10 flex-shrink-0 h-16  border-b border-gray-200 flex md:px-4">
       <button
         type="button"
         className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"

@@ -40,7 +40,7 @@ Requires JS
 
 
 
-import Headbar from "./layout/Headbar";
+import TopBar from "./layout/TopBar";
 import Dashboard from "./layout/Dashboard";
 
 

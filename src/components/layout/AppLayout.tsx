@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import Dashboard from "./Dashboard";
-import Headbar from "components/layout/Headbar";
+import TopBar from "components/layout/TopBar";
 import Sidebar from "components/layout/navigation/Sidebar";
 
 interface Props {
@@ -11,14 +11,16 @@ export default function AppLayout({
   children,
 }: Props): ReactElement {
   return (
-    <div className="bg-indigo-900 min-h-screen ">
+    <div className="min-h-screen ">
       {/* Dashbord & Profile & sidebar  button wrapper */}
-      <div className=" bg-red-600 ">
+      <div>
         {/* sidebar button& search & notification &profile dropdown  wrapper */}
         <Sidebar />
         <div className="md:pl-64">
-          <Headbar />
-          {children}
+          <div className="mx-auto max-w-4xl">
+            <TopBar />
+            {children}
+          </div>
         </div>
         {/* <Dashboard /> */}
       </div>
