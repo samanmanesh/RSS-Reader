@@ -14,6 +14,19 @@ const useArticles = () => {
     setArticles((prev) => [...prev, ...articles]);
   };
 
+  const getFeed = () => {
+    const sortedArticles = articles.sort(
+      (a, b) => {
+        return (
+          a.pubdate.getTime() -
+          b.pubdate.getTime()
+        );
+      }
+    );
+
+    return sortedArticles;
+  };
+
   return {
     articles,
     addArticles,
