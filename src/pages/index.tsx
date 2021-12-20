@@ -14,8 +14,8 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="bg-gray-200 h-full ">
-      <main className="container   min-h-screen  ">
+    <div className="h-full ">
+      <main className=" min-h-screen  ">
         
         {/* <RssTest  /> */}
         <TailwindTemplate  />

@@ -62,7 +62,11 @@ function classNames(...classes) {
 }
 
 const Sidebar = () => {
-  const {sidebarOpen,setSidebarOpen, toggleSidebar} = useSidebar();
+  const {
+    sidebarOpen,
+    setSidebarOpen,
+    toggleSidebar,
+  } = useSidebar();
 
   return (
     <>
@@ -83,6 +87,7 @@ const Sidebar = () => {
           className="fixed inset-0 z-40 flex md:hidden"
           onClose={setSidebarOpen}
         >
+          {/* Background */}
           <Transition.Child
             as={Fragment}
             enter="transition-opacity ease-linear duration-300"
@@ -92,11 +97,11 @@ const Sidebar = () => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            
             <Dialog.Overlay className="fixed inset-0 bg-gray-600 bg-opacity-75" />
           </Transition.Child>
 
-          <Transition.Child
+          {/* Nav Sidebar */}
+          <Transition.Child   
             as={Fragment}
             enter="transition ease-in-out duration-300 transform"
             enterFrom="-translate-x-full"
@@ -105,7 +110,7 @@ const Sidebar = () => {
             leaveFrom="translate-x-0"
             leaveTo="-translate-x-full"
           >
-            <div className="relative max-w-xs w-full bg-white pt-5 pb-4 flex-1 flex flex-col">
+            <div className="relative max-w-xs w-full bg-red-400 pt-5 pb-4 flex-1 flex flex-col">
               <Transition.Child
                 as={Fragment}
                 enter="ease-in-out duration-300"
@@ -115,7 +120,7 @@ const Sidebar = () => {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <div className="absolute top-0 right-0 -mr-12 pt-2">
+                <div className="absolute bg-blue-400 top-0 right-0 -mr-12 pt-2">
                   <button
                     type="button"
                     className="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
@@ -133,14 +138,18 @@ const Sidebar = () => {
                   </button>
                 </div>
               </Transition.Child>
-              <div className="flex-shrink-0 px-4 flex items-center">
+              
+              {/* Logo */}
+              <div className="flex-shrink-0 bg-indigo-500 px-4 flex items-center">
                 <img
                   className="h-8 w-auto"
                   src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg"
                   alt="Workflow"
                 />
               </div>
-              <div className="mt-5 flex-1 h-0 overflow-y-auto">
+              
+              {/* Navigation Items */}
+              <div className="mt-5 bg-yellow-300 flex-1 h-0 overflow-y-auto">
                 <nav className="px-2 space-y-1">
                   {navigation.map((item) => (
                     <a
