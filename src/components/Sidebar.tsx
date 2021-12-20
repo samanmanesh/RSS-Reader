@@ -17,7 +17,7 @@ import {
   XIcon,
 } from "@heroicons/react/outline";
 import { SearchIcon } from "@heroicons/react/solid";
-
+import useSidebar from "../hooks/useSidebar";
 const navigation = [
   {
     name: "Dashboard",
@@ -61,10 +61,9 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const Sidebar = ({
-  sidebarOpen,
-  setSidebarOpen,
-}) => {
+const Sidebar = () => {
+  const {sidebarOpen,setSidebarOpen, toggleSidebar} = useSidebar();
+
   return (
     <>
       {/*
@@ -93,6 +92,7 @@ const Sidebar = ({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
+            
             <Dialog.Overlay className="fixed inset-0 bg-gray-600 bg-opacity-75" />
           </Transition.Child>
 

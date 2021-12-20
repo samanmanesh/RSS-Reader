@@ -7,9 +7,6 @@ const articleState = atom({
 });
 
 const useArticles = () => {
-  // not sure about these but know need to be two atom for the state to manage the state
-  // one for the url and keep track of the urls and one for the articles and keep track of the articles
-
   const [articles, setArticles] =
     useRecoilState<IArticle[]>(articleState);
 

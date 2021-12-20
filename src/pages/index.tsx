@@ -13,14 +13,13 @@ export default function Home() {
     }
   }, [])
 
-  const [sidebarOpen, setSidebarOpen] = useState(false)
   return (
     <div className="bg-gray-200 h-full ">
       <main className="container   min-h-screen  ">
         
         {/* <RssTest  /> */}
-        <TailwindTemplate sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        <TailwindTemplate  />
+        <Sidebar  />
       </main>
     </div>
   );
