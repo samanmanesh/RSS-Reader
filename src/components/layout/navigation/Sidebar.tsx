@@ -20,6 +20,7 @@ import { SearchIcon } from "@heroicons/react/solid";
 import useSidebar from "hooks/useSidebar";
 import { classNames } from "utils/ui.utils";
 import SidebarItem from "./SidebarItem";
+import useModal from "hooks/useModal";
 
 const navigation = [
   {
@@ -61,6 +62,8 @@ const navigation = [
 ];
 
 const Sidebar = () => {
+  const { showModal, openModal, closeModal } =
+    useModal();
   const {
     sidebarOpen,
     setSidebarOpen,
@@ -129,7 +132,6 @@ const Sidebar = () => {
                   </button>
                 </div>
               </Transition.Child>
-
               {/* Logo */}
               <div className="flex-shrink-0 bg-indigo-500 px-4 flex items-center">
                 <img
@@ -138,7 +140,6 @@ const Sidebar = () => {
                   alt="Workflow"
                 />
               </div>
-
               {/* Navigation Items */}
               <div className="mt-5 bg-yellow-300 flex-1 h-0 overflow-y-auto">
                 <nav className="px-2 space-y-1">
@@ -150,6 +151,12 @@ const Sidebar = () => {
                   ))}
                 </nav>
               </div>
+              <button
+                onClick={openModal}
+                className="  bg-indigo-500 rounded-md py-2 px-2 mx-2 mb-4 focus:ring-2 focus:ring-inset focus:ring-white"
+              >
+                ADD New Item
+              </button>{" "}
             </div>
           </Transition.Child>
           <div className="flex-shrink-0 w-14">
@@ -178,6 +185,12 @@ const Sidebar = () => {
                 />
               ))}
             </nav>
+            <button
+              onClick={openModal}
+              className="  bg-indigo-500 rounded-md py-2 px-2 mx-2 mb-4 focus:ring-2 focus:ring-inset focus:ring-white"
+            >
+              ADD New Item
+            </button>
           </div>
         </div>
       </div>

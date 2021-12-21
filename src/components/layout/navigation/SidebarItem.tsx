@@ -3,9 +3,11 @@ import { classNames } from "utils/ui.utils";
 
 interface ISidebarItem {
   name: string;
-    href: string;
-    icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
-    current: boolean;
+  href: string;
+  icon: (
+    props: React.SVGProps<SVGSVGElement>
+  ) => JSX.Element;
+  current: boolean;
 }
 
 interface Props {
@@ -13,7 +15,7 @@ interface Props {
 }
 
 export default function SidebarItem({
-  item
+  item,
 }: Props): ReactElement {
   return (
     <a
