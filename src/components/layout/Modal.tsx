@@ -51,7 +51,7 @@ export default function Modal({
           leaveTo="-translate-y-2"
         >
           <div className="p-2 bg-red-200 relative z-40">
-            Dialog.TItle
+            {children}
           </div>
         </Transition.Child>
       </Dialog>
