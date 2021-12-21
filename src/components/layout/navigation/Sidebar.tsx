@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Fragment, useState } from "react";
 import {
   Dialog,
@@ -21,6 +21,9 @@ import useSidebar from "hooks/useSidebar";
 import { classNames } from "utils/ui.utils";
 import SidebarItem from "./SidebarItem";
 import useModal from "hooks/useModal";
+import Modal from "components/layout/Modal";
+import useArticles from "hooks/useArticles";
+import { getRSSFeed } from "utils/rss.utils";
 
 const navigation = [
   {
@@ -62,16 +65,42 @@ const navigation = [
 ];
 
 const Sidebar = () => {
-  const { showModal, openModal, closeModal } =
-    useModal();
-  const {
-    sidebarOpen,
-    setSidebarOpen,
-    toggleSidebar,
-  } = useSidebar();
+  const [showModal, openModal, closeModal] = useModal();
+  const {sidebarOpen,setSidebarOpen } = useSidebar();
+  const { articles, addArticles } = useArticles();
+  useEffect(() => {
+    if (window) {
+      document.documentElement.classList.add(
+        "dark"
+      );
+    }
+  }, []);
+
+  const cssTricksRSS =
+    "https://css-tricks.com/feed/";
+  const joshRSS =
+    "https://www.joshwcomeau.com/rss.xml";
+
+  const [rssUrl, setRssUrl] =
+    useState(cssTricksRSS);
+
+  const inputHandler = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setRssUrl(e.target.value);
+  };
+
+  const handleGetFeed = async (e) => {
+    e.preventDefault();
+    console.debug("handleGetFeed >>");
+    const results = await getRSSFeed(rssUrl);
+    addArticles(results);
+    setRssUrl("");
+  };
 
   return (
     <>
+    {/* Transition sidebar for small screens */}
       <Transition.Root
         show={sidebarOpen}
         as={Fragment}
@@ -153,9 +182,9 @@ const Sidebar = () => {
               </div>
               <button
                 onClick={openModal}
-                className="  bg-indigo-500 rounded-md py-2 px-2 mx-2 mb-4 focus:ring-2 focus:ring-inset focus:ring-white"
+                className="btn btn-lg btn-light mx-auto mb-6"
               >
-                ADD New Item
+                Add New Item
               </button>{" "}
             </div>
           </Transition.Child>
@@ -187,15 +216,37 @@ const Sidebar = () => {
             </nav>
             <button
               onClick={openModal}
-              className="  bg-indigo-500 rounded-md py-2 px-2 mx-2 mb-4 focus:ring-2 focus:ring-inset focus:ring-white"
+              className="btn btn-lg btn-light mx-auto mb-6"
             >
               Add New Item
             </button>
+            {console.log(showModal)}
           </div>
-        </div>
-        
-      </div>
+          <Modal
+            title="hello"
+            onClose={closeModal}
+            onSubmit={closeModal}
+            show={showModal}
+          >
+            <form onSubmit={handleGetFeed}>
+              <div className="flex flex-col space-y-5 justify-items-center">
+                <label> Type Your RSS URL </label>
 
+                <input
+                  type="text"
+                  onChange={inputHandler}
+                  value={rssUrl}
+                  className=" mb-2 border-4 border-gray-400"
+                />
+                <input
+                  type="submit"
+                  className="p-3 m-6 border-solid border-2 border-black"
+                />
+              </div>
+            </form>
+          </Modal>
+        </div>
+      </div>
     </>
   );
 };

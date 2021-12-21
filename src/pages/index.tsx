@@ -8,8 +8,9 @@ import { getRSSFeed } from "utils/rss.utils";
 import useArticles from "hooks/useArticles";
 
 export default function Home() {
-  const { showModal, openModal, closeModal } =
-    useModal();
+  
+  const [ showModal, openModal, closeModal ] = useModal();
+
   const { articles, addArticles } = useArticles();
   useEffect(() => {
     if (window) {
@@ -57,9 +58,9 @@ export default function Home() {
           <div key={article.guid}>{article.guid}</div>
         ))
       }
-      <Modal
+      {/* <Modal
         title="hello"
-        onClose={closeModal}
+        onClose={closeModal }
         onSubmit={closeModal}
         show={showModal}
       >
@@ -79,7 +80,7 @@ export default function Home() {
             />
           </div>
         </form>
-      </Modal>
+      </Modal> */}
     </div>
   );
 }

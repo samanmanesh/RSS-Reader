@@ -1,8 +1,9 @@
 import React, {
-  ReactElement,
+  
   useState,
 } from "react";
 
+type ReturnType = [boolean, ...Array<() => void>]
 
 export default function useModal() {
   const [showModal, setShowModal] =
@@ -16,9 +17,9 @@ export default function useModal() {
     setShowModal(false);
   };
 
-  return {
+  return [
     showModal,
     openModal,
     closeModal,
-  };
+  ] as ReturnType;
 }

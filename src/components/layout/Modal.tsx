@@ -9,7 +9,7 @@ import React, {
 
 interface Props {
   children: React.ReactElement;
-  show: boolean;
+  show: boolean ;
   onClose: () => void;
   onSubmit: () => void;
   title: string;
