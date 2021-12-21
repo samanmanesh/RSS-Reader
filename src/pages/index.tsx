@@ -3,11 +3,14 @@ import Sidebar from "components/layout/navigation/Sidebar";
 import TailwindTemplate from "components/TailwindTemplate";
 import { useEffect, useState } from "react";
 import Modal from "components/layout/Modal";
-import useModal from '../hooks/useModal';
+import useModal from "../hooks/useModal";
+import { getRSSFeed } from "utils/rss.utils";
+import useArticles from "hooks/useArticles";
 
 export default function Home() {
-  //const [showModal, setShowModal] = useState(false)
-  const {showModal, openModal, closeModal} = useModal();
+  const { showModal, openModal, closeModal } =
+    useModal();
+  const { articles, addArticles } = useArticles();
   useEffect(() => {
     if (window) {
       document.documentElement.classList.add(
@@ -16,29 +19,56 @@ export default function Home() {
     }
   }, []);
 
+  const joshRSS =
+    "https://www.joshwcomeau.com/rss.xml";
+
+  const [rssUrl, setRssUrl] = useState(joshRSS);
+
+  const inputHandler = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setRssUrl(e.target.value);
+  };
+
+  const handleGetFeed = async (e) => {
+    e.preventDefault();
+    console.debug("handleGetFeed >>");
+    const results = await getRSSFeed(rssUrl);
+    addArticles(results);
+    setRssUrl("");
+  };
+
   return (
     <div className="h-full">
-      <RssTest />
+      {/* <RssTest /> */}
       {/* <TailwindTemplate  /> */}
       {/* <Sidebar  /> */}
-      We are in index
-      
-      <button
-      // onClick={() => setShowModal(true)}
-      onClick={openModal}
-      >
+  
+      {/* <button onClick={openModal}>
         show modal
-      </button>
+      </button> */}
       <Modal
         title="hello"
-        // onClose={() => setShowModal(false)}
-        // onSubmit={() =>  setShowModal(false)}
-        // show={showModal}
         onClose={closeModal}
         onSubmit={closeModal}
         show={showModal}
       >
-        <div>lskdflsdjkf</div>
+        <form onSubmit={handleGetFeed}>
+          <div className="flex flex-col space-y-5 justify-items-center">
+            <label> Type Your RSS URL </label>
+
+            <input
+              type="text"
+              onChange={inputHandler}
+              value={rssUrl}
+              className=" mb-2 border-4 border-gray-400"
+            />
+            <input
+              type="submit"
+              className="p-3 m-6 border-solid border-2 border-black"
+            />
+          </div>
+        </form>
       </Modal>
     </div>
   );

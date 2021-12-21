@@ -50,7 +50,7 @@ export default function Modal({
           leaveFrom="translate-y-0"
           leaveTo="-translate-y-2"
         >
-          <div className="p-2 bg-red-200 relative z-40">
+          <div className="p-12 rounded-md bg-indigo-400 relative z-40">
             {children}
           </div>
         </Transition.Child>
