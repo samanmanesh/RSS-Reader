@@ -1,14 +1,12 @@
-import React, { ReactElement } from "react";
-import { atom, useRecoilState } from "recoil";
+import React, {
+  ReactElement,
+  useState,
+} from "react";
 
-const modalState = atom({
-  key: "modalState",
-  default: false,
-});
 
 export default function useModal() {
   const [showModal, setShowModal] =
-    useRecoilState<boolean>(modalState);
+    useState<boolean>(false);
 
   const openModal = () => {
     setShowModal(true);

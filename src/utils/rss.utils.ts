@@ -22,8 +22,10 @@ const parseCDATA = (str: string) => {
 const convertItemToArticle = (
   item: Element
 ): IArticle => {
+
+  // id: uuidv4(),
   const article: IArticle = {
-    id: uuidv4(),
+    guid: "",
     title: "",
     pubdate: new Date(),
   };
@@ -39,6 +41,10 @@ const convertItemToArticle = (
       value = new Date(value);
     }
 
+    
+    
+    
+    
     article[key] = value;
   }
 
@@ -69,7 +75,6 @@ const validateRSSUrl = (url: string): boolean => {
 export const getRSSFeed = async (
   url: string
 ): Promise<IArticle[] | undefined> => {
-  
   if (!validateRSSUrl(url)) {
     console.error("Invalid URL");
     return;

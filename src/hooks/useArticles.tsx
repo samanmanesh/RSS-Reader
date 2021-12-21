@@ -1,4 +1,3 @@
-import React from "react";
 import { atom, useRecoilState } from "recoil";
 
 const articleState = atom({
@@ -23,11 +22,33 @@ interface IFeed {
 const useArticles = () => {
   const [articles, setArticles] =
     useRecoilState<IArticle[]>(articleState);
+
   const [feeds, setFeed] = useRecoilState<IFeed[]>(feedsState);
 
 
-  const addArticles = (articles: IArticle[]) => {
-    setArticles((prev) => [...prev, ...articles]);
+  const addArticles = (newArticles: IArticle[]) => {
+    if (!newArticles) {
+      console.error('New articles are undefined');
+      return;
+    }
+    setArticles((prev) => {
+      const newArticlesNoDuplicates = newArticles.filter(
+        (article) => !prev.some((prevArticle) => prevArticle.guid === article.guid)
+      );
+      return [...prev, ...newArticlesNoDuplicates];
+    });
+    //adding article to prev articles array
+    // console.debug("articles", articles);
+    // console.debug("articlesParams", articlesParams);
+
+    // const newArticles = articles.slice();
+    // const artPara = articlesParams.slice();
+    //newArticles.push(artPara);
+    // setArticles(newArticles);
+    
+ 
+    // console.debug("articles", articles);
+      
   };
 
   const addFeed = (feed: IFeed) => {

@@ -19,10 +19,12 @@ export default function Home() {
     }
   }, []);
 
+  const cssTricksRSS =
+  "https://css-tricks.com/feed/";
   const joshRSS =
     "https://www.joshwcomeau.com/rss.xml";
 
-  const [rssUrl, setRssUrl] = useState(joshRSS);
+  const [rssUrl, setRssUrl] = useState(cssTricksRSS);
 
   const inputHandler = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -34,9 +36,12 @@ export default function Home() {
     e.preventDefault();
     console.debug("handleGetFeed >>");
     const results = await getRSSFeed(rssUrl);
+    console.debug("handleGetFeed <<", results);
     addArticles(results);
     setRssUrl("");
   };
+
+  console.debug('index', articles)
 
   return (
     <div className="h-full">
@@ -47,6 +52,11 @@ export default function Home() {
       {/* <button onClick={openModal}>
         show modal
       </button> */}
+      {
+        articles.map(article => (
+          <div key={article.guid}>{article.guid}</div>
+        ))
+      }
       <Modal
         title="hello"
         onClose={closeModal}

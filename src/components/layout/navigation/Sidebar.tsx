@@ -189,11 +189,13 @@ const Sidebar = () => {
               onClick={openModal}
               className="  bg-indigo-500 rounded-md py-2 px-2 mx-2 mb-4 focus:ring-2 focus:ring-inset focus:ring-white"
             >
-              ADD New Item
+              Add New Item
             </button>
           </div>
         </div>
+        
       </div>
+
     </>
   );
 };
