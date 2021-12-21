@@ -133,7 +133,7 @@ const Sidebar = () => {
             leaveFrom="translate-x-0"
             leaveTo="-translate-x-full"
           >
-            <div className="relative max-w-xs w-full bg-red-400 pt-5 pb-4 flex-1 flex flex-col">
+            <div className="relative max-w-xs w-full bg-white pt-5 pb-4 flex-1 flex flex-col">
               <Transition.Child
                 as={Fragment}
                 enter="ease-in-out duration-300"
@@ -143,7 +143,7 @@ const Sidebar = () => {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <div className="absolute bg-blue-400 top-0 right-0 -mr-12 pt-2">
+                <div className="absolute  top-0 right-0 -mr-12 pt-2">
                   <button
                     type="button"
                     className="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
@@ -162,7 +162,7 @@ const Sidebar = () => {
                 </div>
               </Transition.Child>
               {/* Logo */}
-              <div className="flex-shrink-0 bg-indigo-500 px-4 flex items-center">
+              <div className="flex-shrink-0  px-4 flex items-center">
                 <img
                   className="h-8 w-auto"
                   src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg"
@@ -170,7 +170,7 @@ const Sidebar = () => {
                 />
               </div>
               {/* Navigation Items */}
-              <div className="mt-5 bg-yellow-300 flex-1 h-0 overflow-y-auto">
+              <div className="mt-5  flex-1 h-0 overflow-y-auto">
                 <nav className="px-2 space-y-1">
                   {navigation.map((item) => (
                     <SidebarItem
