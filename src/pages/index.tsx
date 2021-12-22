@@ -4,7 +4,12 @@ import { getRSSFeedData } from "utils/rss.utils";
 import useArticles from "hooks/useArticles";
 
 export default function Home() {
-  const { articles, addArticles, localFeeds } = useArticles();
+  const {
+    articles,
+    addArticles,
+    localFeeds,
+    feeds,
+  } = useArticles();
   useEffect(() => {
     if (window) {
       document.documentElement.classList.add(
@@ -42,9 +47,8 @@ export default function Home() {
     <div className="h-full">
       {/* <RssTest /> */}
 
-      
-
-      {articles.map((item) => {
+      {/* showing all articles */}
+      {/* {articles.map((item) => {
         return (
           <div
             className="bg-gray-100 p-2 rounded-sm mb-4"
@@ -73,6 +77,22 @@ export default function Home() {
                 );
               }
             )}
+          </div>
+        );
+      })} */}
+      {/* just showing the feeds( url and name) */}
+      {feeds.map((item) => {
+        return (
+          <div
+            className="bg-gray-100 p-2 rounded-sm mb-4"
+            key={item.link}
+          >
+            <h1 className="text-3xl font-bold mb-2">
+              {item.name}
+            </h1>
+
+            <hr className="my-5 block" />
+            <a href={item.link}>{item.link}</a>
           </div>
         );
       })}
