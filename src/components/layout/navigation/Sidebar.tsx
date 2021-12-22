@@ -1,5 +1,8 @@
-import React, { useEffect } from "react";
-import { Fragment, useState } from "react";
+import React, {
+  useEffect,
+  useState,
+} from "react";
+import { Fragment,  } from "react";
 import {
   Dialog,
   Menu,
@@ -23,51 +26,59 @@ import SidebarItem from "./SidebarItem";
 import useModal from "hooks/useModal";
 import Modal from "components/layout/Modal";
 import useArticles from "hooks/useArticles";
-import { getRSSFeedData, getRSSFeed } from "utils/rss.utils";
+import {
+  getRSSFeedData,
+  getRSSFeed,
+} from "utils/rss.utils";
 
 const navigation = [
   {
-    name: "Dashboard",
+    name: "Unread",
     href: "#",
     icon: HomeIcon,
-    current: true,
-  },
-  {
-    name: "Team",
-    href: "#",
-    icon: UsersIcon,
     current: false,
   },
   {
-    name: "Projects",
+    name: "Feeds",
+    href: "#",
+    icon: UsersIcon,
+    current: true,
+  },
+  {
+    name: "Folders",
     href: "#",
     icon: FolderIcon,
     current: false,
   },
-  {
-    name: "Calendar",
-    href: "#",
-    icon: CalendarIcon,
-    current: false,
-  },
-  {
-    name: "Documents",
-    href: "#",
-    icon: InboxIcon,
-    current: false,
-  },
-  {
-    name: "Reports",
-    href: "#",
-    icon: ChartBarIcon,
-    current: false,
-  },
+  // {
+  //   name: "Calendar",
+  //   href: "#",
+  //   icon: CalendarIcon,
+  //   current: false,
+  // },
+  // {
+  //   name: "Documents",
+  //   href: "#",
+  //   icon: InboxIcon,
+  //   current: false,
+  // },
+  // {
+  //   name: "Reports",
+  //   href: "#",
+  //   icon: ChartBarIcon,
+  //   current: false,
+  // },
 ];
 
 const Sidebar = () => {
-  const [showModal, openModal, closeModal] = useModal();
-  const {sidebarOpen,setSidebarOpen } = useSidebar();
-  const { articles, addArticles,addFeed } = useArticles();
+  const [showModal, openModal, closeModal] =
+    useModal();
+  const { sidebarOpen, setSidebarOpen } =
+    useSidebar();
+  const { articles, addArticles, addFeed } =
+    useArticles();
+  const[selectNavItem, setSelectNavItem]=useState("");
+
   useEffect(() => {
     if (window) {
       document.documentElement.classList.add(
@@ -97,22 +108,32 @@ const Sidebar = () => {
     addArticles(results);
     setRssUrl("");
   };
-  {/**just take url and name IFeed and store it on Feeds on local storage */}
+  {
+    /**just take url and name IFeed and store it on Feeds on local storage */
+  }
   const handleGetFeed = async (e) => {
     e.preventDefault();
     console.debug("handleGetFeed >>");
     const results = await getRSSFeed(rssUrl);
     console.debug("results is", results);
-   
-    if(results) addFeed(results);
+
+    if (results) addFeed(results);
     setRssUrl("");
   };
 
-
+  const handleToggle = (name: string) => {
+    navigation.forEach((item) => {
+      if (item.name === name) {
+        item.current = !item.current;
+        setSelectNavItem(name);
+      }
+    });
+  };
+  console.log("selectNavItem", selectNavItem)
 
   return (
     <>
-    {/* Transition sidebar for small screens */}
+      {/* Transition sidebar for small screens */}
       <Transition.Root
         show={sidebarOpen}
         as={Fragment}
@@ -188,6 +209,7 @@ const Sidebar = () => {
                     <SidebarItem
                       key={item.name}
                       item={item}
+                      handleToggle={handleToggle}
                     />
                   ))}
                 </nav>
@@ -223,6 +245,7 @@ const Sidebar = () => {
                 <SidebarItem
                   key={item.name}
                   item={item}
+                  handleToggle={handleToggle}
                 />
               ))}
             </nav>
