@@ -2,7 +2,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { Fragment,  } from "react";
+import { Fragment } from "react";
 import {
   Dialog,
   Menu,
@@ -33,22 +33,19 @@ import {
 
 const navigation = [
   {
-    name: "Unread",
-    href: "#",
+    name: "Home",
+    href: "/",
     icon: HomeIcon,
-    current: false,
   },
   {
     name: "Feeds",
-    href: "#",
+    href: "/about",
     icon: UsersIcon,
-    current: true,
   },
   {
     name: "Folders",
     href: "#",
     icon: FolderIcon,
-    current: false,
   },
   // {
   //   name: "Calendar",
@@ -77,7 +74,8 @@ const Sidebar = () => {
     useSidebar();
   const { articles, addArticles, addFeed } =
     useArticles();
-  const[selectNavItem, setSelectNavItem]=useState("");
+  const [selectNavItem, setSelectNavItem] =
+    useState("");
 
   useEffect(() => {
     if (window) {
@@ -124,12 +122,12 @@ const Sidebar = () => {
   const handleToggle = (name: string) => {
     navigation.forEach((item) => {
       if (item.name === name) {
-        item.current = !item.current;
+        // item.current = !item.current;
         setSelectNavItem(name);
       }
     });
   };
-  console.log("selectNavItem", selectNavItem)
+  console.log("selectNavItem", selectNavItem);
 
   return (
     <>

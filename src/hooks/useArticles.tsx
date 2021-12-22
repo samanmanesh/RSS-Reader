@@ -1,6 +1,6 @@
 import { atom, useRecoilState } from "recoil";
 import useLocalStorage from "hooks/useLocalStorage";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { getRSSFeedData } from "utils/rss.utils";
 
 const articleState = atom({
@@ -11,67 +11,80 @@ const articleState = atom({
 const feedsState = atom({
   key: "feeds",
   default: [],
-})
+});
 
 interface IFeed {
   name: string;
   link: string;
 }
 
-
 const useArticles = () => {
   const [articles, setArticles] =
     useRecoilState<IArticle[]>(articleState);
-  const [feeds, setFeeds] = useRecoilState<IFeed[]>(feedsState);
-  const [localFeeds, setLocalFeeds] = useLocalStorage<IFeed[]>("feeds")
+  const [feeds, setFeeds] =
+    useRecoilState<IFeed[]>(feedsState);
+  const [localFeeds, setLocalFeeds] =
+    useLocalStorage<IFeed[]>("feeds");
 
   useEffect(() => {
     if (localFeeds) {
       setFeeds(localFeeds);
     }
-      }, []) 
+  }, []);
 
-      useEffect( () => {
-        // if (feeds.length > 0) {
-          
-        //   const feed = feeds[0];
-        //   const url = feed.link;
-        //   const results = await getRSSFeedData(url);
-        //   addArticles( results);
-        // }
-        showArticles();
-      }, [feeds]);
+  useEffect(() => {
+    refreshArticles();
+  }, [feeds]);
 
+  const refreshArticles = async () => {
+    // 1. Get all articles from all feeds
 
-      const showArticles = async () =>
-      {
-        if (feeds.length > 0) {
-          feeds.forEach(async (feed) => {
-            const url = feed.link;
-            const results = await getRSSFeedData(url);
-            addArticles(results);
-          });
-        }
-      }
-      //         )
-      //     const feed = feeds[0];
-      //     const url = feed.link;
-      //     const results = await getRSSFeedData(url);
-      //     addArticles( results);
+    // 2. Sort them
 
-      //   }
-      // }
+    // 3. Save them in state
 
-  const addArticles = (newArticles: IArticle[]) => {
+    
+  }
+
+  const fetchArticles = async () => {
+    if (feeds.length > 0) {
+      feeds.forEach(async (feed) => {
+        const url = feed.link;
+        const results = await getRSSFeedData(url);
+        addArticles(results);
+      });
+    }
+  };
+
+  //         )
+  //     const feed = feeds[0];
+  //     const url = feed.link;
+  //     const results = await getRSSFeedData(url);
+  //     addArticles( results);
+
+  //   }
+  // }
+
+  const addArticles = (
+    newArticles: IArticle[]
+  ) => {
     if (!newArticles) {
-      console.error('New articles are undefined');
+      console.error("New articles are undefined");
       return;
     }
     setArticles((prev) => {
-      const newArticlesNoDuplicates = newArticles.filter(
-        (article) => !prev.some((prevArticle) => prevArticle.guid === article.guid)
-      );
-      return [...prev, ...newArticlesNoDuplicates];
+      const newArticlesNoDuplicates =
+        newArticles.filter(
+          (article) =>
+            !prev.some(
+              (prevArticle) =>
+                prevArticle.guid === article.guid
+            )
+        );
+      return [
+        ...prev,
+        ...newArticlesNoDuplicates,
+      ];
     });
     //adding article to prev articles array
     // console.debug("articles", articles);
@@ -81,10 +94,8 @@ const useArticles = () => {
     // const artPara = articlesParams.slice();
     //newArticles.push(artPara);
     // setArticles(newArticles);
-    
- 
+
     // console.debug("articles", articles);
-      
   };
 
   const addFeed = (feed: IFeed) => {
