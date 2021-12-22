@@ -1,6 +1,7 @@
 import { atom, useRecoilState } from "recoil";
 import useLocalStorage from "hooks/useLocalStorage";
 import { useEffect } from "react";
+import { getRSSFeedData } from "utils/rss.utils";
 
 const articleState = atom({
   key: "articleState",
@@ -30,8 +31,36 @@ const useArticles = () => {
     }
       }, []) 
 
+      useEffect( () => {
+        // if (feeds.length > 0) {
+          
+        //   const feed = feeds[0];
+        //   const url = feed.link;
+        //   const results = await getRSSFeedData(url);
+        //   addArticles( results);
+        // }
+        showArticles();
+      }, [feeds]);
 
 
+      const showArticles = async () =>
+      {
+        if (feeds.length > 0) {
+          feeds.forEach(async (feed) => {
+            const url = feed.link;
+            const results = await getRSSFeedData(url);
+            addArticles(results);
+          });
+        }
+      }
+      //         )
+      //     const feed = feeds[0];
+      //     const url = feed.link;
+      //     const results = await getRSSFeedData(url);
+      //     addArticles( results);
+
+      //   }
+      // }
 
   const addArticles = (newArticles: IArticle[]) => {
     if (!newArticles) {
