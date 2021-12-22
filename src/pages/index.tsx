@@ -1,10 +1,10 @@
 import RssTest from "components/RssTest";
 import { useEffect, useState } from "react";
-import { getRSSFeed } from "utils/rss.utils";
+import { getRSSFeedData } from "utils/rss.utils";
 import useArticles from "hooks/useArticles";
 
 export default function Home() {
-  const { articles, addArticles } = useArticles();
+  const { articles, addArticles, localFeeds } = useArticles();
   useEffect(() => {
     if (window) {
       document.documentElement.classList.add(
@@ -13,6 +13,7 @@ export default function Home() {
     }
   }, []);
 
+  console.debug("localFeeds", localFeeds);
   const cssTricksRSS =
     "https://css-tricks.com/feed/";
   const joshRSS =

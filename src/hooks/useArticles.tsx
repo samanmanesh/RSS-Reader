@@ -1,4 +1,6 @@
 import { atom, useRecoilState } from "recoil";
+import useLocalStorage from "hooks/useLocalStorage";
+import { useEffect } from "react";
 
 const articleState = atom({
   key: "articleState",
@@ -11,19 +13,24 @@ const feedsState = atom({
 })
 
 interface IFeed {
-  id: string;
-  title: string;
+  name: string;
   link: string;
-  description: string;
-  pubDate: Date;
-  items: IArticle[];
 }
+
 
 const useArticles = () => {
   const [articles, setArticles] =
     useRecoilState<IArticle[]>(articleState);
+  const [feeds, setFeeds] = useRecoilState<IFeed[]>(feedsState);
+  const [localFeeds, setLocalFeeds] = useLocalStorage<IFeed[]>("feeds")
 
-  const [feeds, setFeed] = useRecoilState<IFeed[]>(feedsState);
+  useEffect(() => {
+    if (localFeeds) {
+      setFeeds(localFeeds);
+    }
+      }, []) 
+
+
 
 
   const addArticles = (newArticles: IArticle[]) => {
@@ -52,7 +59,8 @@ const useArticles = () => {
   };
 
   const addFeed = (feed: IFeed) => {
-    setFeed((prev) => [...prev, feed]);
+    setFeeds((prev) => [...prev, feed]);
+    setLocalFeeds([...feeds, feed]); //! why we add feed to feeds here as it already added feeds in global state?
   };
 
   const getFeed = () => {
@@ -72,7 +80,8 @@ const useArticles = () => {
     articles,
     addArticles,
     feeds,
-    setFeed,
+    addFeed,
+    localFeeds,
   };
 };
 

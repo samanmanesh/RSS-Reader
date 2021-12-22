@@ -23,7 +23,7 @@ import SidebarItem from "./SidebarItem";
 import useModal from "hooks/useModal";
 import Modal from "components/layout/Modal";
 import useArticles from "hooks/useArticles";
-import { getRSSFeed } from "utils/rss.utils";
+import { getRSSFeedData, getRSSFeed } from "utils/rss.utils";
 
 const navigation = [
   {
@@ -67,7 +67,7 @@ const navigation = [
 const Sidebar = () => {
   const [showModal, openModal, closeModal] = useModal();
   const {sidebarOpen,setSidebarOpen } = useSidebar();
-  const { articles, addArticles } = useArticles();
+  const { articles, addArticles,addFeed } = useArticles();
   useEffect(() => {
     if (window) {
       document.documentElement.classList.add(
@@ -90,13 +90,25 @@ const Sidebar = () => {
     setRssUrl(e.target.value);
   };
 
+  const handleGetFeedData = async (e) => {
+    e.preventDefault();
+    console.debug("handleGetFeedData >>");
+    const results = await getRSSFeedData(rssUrl);
+    addArticles(results);
+    setRssUrl("");
+  };
+  {/**just take url and name IFeed and store it on Feeds on local storage */}
   const handleGetFeed = async (e) => {
     e.preventDefault();
     console.debug("handleGetFeed >>");
     const results = await getRSSFeed(rssUrl);
-    addArticles(results);
+    console.debug("results is", results);
+   
+    if(results) addFeed(results);
     setRssUrl("");
   };
+
+
 
   return (
     <>

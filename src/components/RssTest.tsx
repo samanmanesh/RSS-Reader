@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getRSSFeed } from "../utils/rss.utils";
+import { getRSSFeedData } from "../utils/rss.utils";
 import useArticles from "../hooks/useArticles";
 
 const podcastRSS =
@@ -19,7 +19,7 @@ const RssTest = (): JSX.Element => {
   const handleGetFeed = async (e) => {
     e.preventDefault();
     console.debug("handleGetFeed >>");
-    const results = await getRSSFeed(rssUrl);
+    const results = await getRSSFeedData(rssUrl);
     addArticles(results);
     setRssUrl("");
   };

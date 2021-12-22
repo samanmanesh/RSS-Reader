@@ -8,3 +8,8 @@ interface IArticle {
   description?: string;
   content?: string;
 }
+
+interface IFeed {
+  name: string;
+  link: string;
+}

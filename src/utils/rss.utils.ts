@@ -22,7 +22,6 @@ const parseCDATA = (str: string) => {
 const convertItemToArticle = (
   item: Element
 ): IArticle => {
-
   // id: uuidv4(),
   const article: IArticle = {
     guid: "",
@@ -41,10 +40,6 @@ const convertItemToArticle = (
       value = new Date(value);
     }
 
-    
-    
-    
-    
     article[key] = value;
   }
 
@@ -72,7 +67,29 @@ const validateRSSUrl = (url: string): boolean => {
   return false;
 };
 
-export const getRSSFeed = async (
+export const getRSSFeed = async (url: string): Promise<IFeed> => {
+  
+    if (!validateRSSUrl(url)) {
+      console.error("invalid url", url);
+      return;
+    }
+    const match = url.match(/^(?:https?:)?(?:\/\/)?([^\/\?]+)/i);
+    const hostname = match && match[1];
+
+    const feed: IFeed = {
+      name: hostname,
+      link: url,
+    }
+
+    
+    return feed;
+
+  } 
+
+
+
+
+export const getRSSFeedData = async (
   url: string
 ): Promise<IArticle[] | undefined> => {
   if (!validateRSSUrl(url)) {
