@@ -72,7 +72,7 @@ const Sidebar = () => {
     useModal();
   const { sidebarOpen, setSidebarOpen } =
     useSidebar();
-  const { articles, addArticles, addFeed } =
+  const { articles,  addFeed } =
     useArticles();
   const [selectNavItem, setSelectNavItem] =
     useState("");
@@ -99,13 +99,13 @@ const Sidebar = () => {
     setRssUrl(e.target.value);
   };
 
-  const handleGetFeedData = async (e) => {
-    e.preventDefault();
-    console.debug("handleGetFeedData >>");
-    const results = await getRSSFeedData(rssUrl);
-    addArticles(results);
-    setRssUrl("");
-  };
+  // const handleGetFeedData = async (e) => {
+  //   e.preventDefault();
+  //   console.debug("handleGetFeedData >>");
+  //   const results = await getRSSFeedData(rssUrl);
+  //   // addArticles(results);
+  //   setRssUrl("");
+  // };
   {
     /**just take url and name IFeed and store it on Feeds on local storage */
   }
