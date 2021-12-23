@@ -2,6 +2,7 @@ import { atom, useRecoilState } from "recoil";
 import useLocalStorage from "hooks/useLocalStorage";
 import { useEffect, useMemo } from "react";
 import { getRSSFeedData } from "utils/rss.utils";
+import { removeDuplicateArticles, sortArticles } from "utils/articles.utils";
 
 const articleState = atom({
   key: "articleState",
@@ -13,10 +14,10 @@ const feedsState = atom({
   default: [],
 });
 
-interface IFeed {
-  name: string;
-  link: string;
-}
+// interface IFeed {
+//   name: string;
+//   link: string;
+// }
 
 const useArticles = () => {
   const [articles, setArticles] =
@@ -38,23 +39,37 @@ const useArticles = () => {
 
   const refreshArticles = async () => {
     // 1. Get all articles from all feeds
+    const newArticles = await fetchArticles();
 
-    // 2. Sort them
+    // 2. Sort them and remove duplicates
+    const sortedArticles = sortArticles(newArticles);
+    const uniqueArticles = removeDuplicateArticles(sortedArticles);
 
     // 3. Save them in state
-
-    
+    setArticles(uniqueArticles);
   }
 
-  const fetchArticles = async () => {
+  const fetchArticles = async (): Promise<IArticle[]> => {
+    const articleResults: IArticle[] = [];
     if (feeds.length > 0) {
       feeds.forEach(async (feed) => {
         const url = feed.link;
         const results = await getRSSFeedData(url);
-        addArticles(results);
+        articleResults.push(...results)
       });
     }
+    return articleResults;
   };
+
+  // const fetchArticles = async () => {
+  //   if (feeds.length > 0) {
+  //     feeds.forEach(async (feed) => {
+  //       const url = feed.link;
+  //       const results = await getRSSFeedData(url);
+  //       addArticles(results);
+  //     });
+  //   }
+  // };
 
   //         )
   //     const feed = feeds[0];
@@ -101,19 +116,6 @@ const useArticles = () => {
   const addFeed = (feed: IFeed) => {
     setFeeds((prev) => [...prev, feed]);
     setLocalFeeds([...feeds, feed]); //! why we add feed to feeds here as it already added feeds in global state?
-  };
-
-  const getFeed = () => {
-    const sortedArticles = articles.sort(
-      (a, b) => {
-        return (
-          a.pubdate.getTime() -
-          b.pubdate.getTime()
-        );
-      }
-    );
-
-    return sortedArticles;
   };
 
   return {

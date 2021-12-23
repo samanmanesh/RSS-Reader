@@ -10,7 +10,7 @@ interface ISidebarItem {
   icon: (
     props: React.SVGProps<SVGSVGElement>
   ) => JSX.Element;
-  current: boolean;
+  current?: boolean;
 }
 
 interface Props {
@@ -50,7 +50,9 @@ export default function SidebarItem({
           {item.name}
         </a>
       </Link>
-      {item.name === "Feeds" && item.current && (
+      {/* {item.name === "Feeds" && item.current &&  */}
+      {item.name === "Feeds" &&
+      (
         <ul className="p-2">
           {feeds.map((feed) => (
             <li
