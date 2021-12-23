@@ -30,6 +30,7 @@ import {
   getRSSFeedData,
   getRSSFeed,
 } from "utils/rss.utils";
+import SidebarFeedItem from "./SidebarFeedItem";
 
 const navigation = [
   {
@@ -38,7 +39,7 @@ const navigation = [
     icon: HomeIcon,
   },
   {
-    name: "Feeds",
+    name: "User",
     href: "/about",
     icon: UsersIcon,
   },
@@ -229,18 +230,18 @@ const Sidebar = () => {
       </Transition.Root>
 
       {/* Static sidebar for desktop */}
-      <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
+      <div className="hidden  md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
         {/* Sidebar component, swap this element with another sidebar if you like */}
-        <div className="border-r border-gray-200 pt-5 flex flex-col flex-grow bg-white overflow-y-auto">
-          <div className="flex-shrink-0 px-4 flex items-center">
+        <div className="border-r border-gray-200 pt-5 flex flex-col flex-grow bg-white  overflow-y-auto">
+          <div className="flex-shrink-0 px-4 flex items-center ">
             <img
               className="h-8 w-auto"
               src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg"
               alt="Workflow"
             />
           </div>
-          <div className="flex-grow mt-5 flex flex-col">
-            <nav className="flex-1 px-2 pb-4 space-y-1">
+          <div className="flex-grow mt-5 flex flex-col ">
+            <nav className="flex-1 px-2 pb-4 space-y-1 bg-blue-400">
               {navigation.map((item) => (
                 <SidebarItem
                   key={item.name}
@@ -249,6 +250,11 @@ const Sidebar = () => {
                 />
               ))}
             </nav>
+            <section className="flex-grow bg-red-400 ">
+                <span> Feeds </span>
+               <SidebarFeedItem/> 
+            </section>
+
             <button
               onClick={openModal}
               className="btn btn-lg btn-light mx-auto mb-6"
