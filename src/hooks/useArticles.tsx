@@ -41,23 +41,23 @@ const useArticles = () => {
   }, [feeds]);
 
   const refreshArticles = async () => {
-    // 1. Get all articles from all feeds
+    //? 1. Get all articles from all feeds
     const newArticles = await fetchArticles();
 
-    // 2. Sort them and remove duplicates
+    //? 2. Sort them and remove duplicates
     const sortedArticles =
-      sortArticles(newArticles);
+        sortArticles(newArticles);
     console.debug(
       "sortedArticles",
       sortedArticles
     );
-    // const uniqueArticles =
-    //   removeDuplicateArticles(sortedArticles);
+
+    //  const uniqueArticles =
+    //    removeDuplicateArticles(sortedArticles);
     //   console.debug("uniqueArticles", uniqueArticles);
 
-    // 3. Save them in state
-    //setArticles(uniqueArticles);
-    //setArticles(sortedArticles);
+    //? 3. Save them in state
+    
     setArticles(sortedArticles);
   };
 

@@ -1,6 +1,6 @@
 
 interface IArticle {
-  id?: string;
+  id: string;
   guid: string;
   title: string;
   pubdate: Date;

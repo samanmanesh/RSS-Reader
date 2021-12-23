@@ -2,13 +2,19 @@ import RssTest from "components/RssTest";
 import { useEffect, useState } from "react";
 import { getRSSFeedData } from "utils/rss.utils";
 import useArticles from "hooks/useArticles";
+import Link from "next/link";
+
+// const routes = [
+//   {}
+    
+// ];
+
+
+
 
 export default function Home() {
-  const {
-    articles,
-    localFeeds,
-    feeds,
-  } = useArticles();
+  const { articles, localFeeds, feeds } =
+    useArticles();
   useEffect(() => {
     if (window) {
       document.documentElement.classList.add(
@@ -18,11 +24,13 @@ export default function Home() {
   }, []);
 
   console.debug("localFeeds", localFeeds);
-  console.debug("articles in index" , articles);
+  console.debug("articles in index", articles);
   const cssTricksRSS =
     "https://css-tricks.com/feed/";
   const joshRSS =
     "https://www.joshwcomeau.com/rss.xml";
+  const mediumRSS =
+    "https://medium.com/feed/@joshwcomeau";
 
   // const [rssUrl, setRssUrl] = useState(cssTricksRSS);
 
@@ -41,25 +49,41 @@ export default function Home() {
   //   setRssUrl("");
   // };
 
-  console.debug("index", articles);
-
   return (
     <div className="h-full">
       {/* <RssTest /> */}
 
-      {/* showing all articles */}
+      {/* showing image if has, title, author name, feed name and date  */}
       {articles.map((item) => {
         return (
-          <div
-            className="bg-gray-100 p-2 rounded-sm mb-4"
-            key={item.guid}
-          >
-            <h1 className="text-3xl font-bold mb-2">
-              {item.title}
-            </h1>
-            <hr className="my-5 block" />
+          <Link href={'/articles/' + item.id } key={item.id} >
+            <div
+              className="bg-gray-100 p-2 rounded-sm mb-4"
+              key={item.guid}
+            >
+              <div className="w-4 h-2 mb-8">
+                Image Wrapper 
+              </div>
 
-            {Object.entries(item).map(
+              <hr className="my-5 block" />
+
+              <h1 className="text-2xl font-bold mb-2">
+                {item.title}
+              </h1>
+
+              <h2 className="text-xl font-bold mb-2">
+                Author Name
+              </h2>
+
+              <h3 className="text-xl font-bold mb-2">
+                Feed Name
+              </h3>
+
+              <h4 className="text-xl font-bold mb-2">
+                Date
+              </h4>
+
+              {/* {Object.entries(item).map(
               ([key, value]) => {
                 return (
                   <div key={key} className="mb-2">
@@ -76,26 +100,46 @@ export default function Home() {
                   </div>
                 );
               }
-            )}
-          </div>
+            )} */}
+            </div>
+          </Link>
         );
       })}
-      {/* just showing the feeds( url and name) */}
-      {/* {feeds.map((item) => {
-        return (
-          <div
-            className="bg-gray-100 p-2 rounded-sm mb-4"
-            key={item.link}
-          >
-            <h1 className="text-3xl font-bold mb-2">
-              {item.name}
-            </h1>
-
-            <hr className="my-5 block" />
-            <a href={item.link}>{item.link}</a>
-          </div>
-        );
-      })} */}
     </div>
+    
   );
 }
+
+
+//       <div
+    //         className="bg-gray-100 p-2 rounded-sm mb-4"
+    //         key={item.guid}
+    //       >
+    //         <h1 className="text-3xl font-bold mb-2">
+    //           {item.title}
+    //         </h1>
+    //         <hr className="my-5 block" />
+
+    //         {Object.entries(item).map(
+    //           ([key, value]) => {
+    //             return (
+    //               <div key={key} className="mb-2">
+    //                 <span className="font-bold">
+    //                   {key}:{" "}
+    //                 </span>
+    //                 <div className="prose prose-headings:text-purple-500">
+    //                   <span
+    //                     dangerouslySetInnerHTML={{
+    //                       __html: value,
+    //                     }}
+    //                   />
+    //                 </div>
+    //               </div>
+    //             );
+    //           }
+    //         )}
+    //       </div>
+    //     );
+    //   })}
+
+    // </div>

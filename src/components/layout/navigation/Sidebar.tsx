@@ -94,7 +94,7 @@ const Sidebar = () => {
     "https://rss.nytimes.com/services/xml/rss/nyt/World.xml";
 
   const [rssUrl, setRssUrl] =
-    useState(cssTricksRSS);
+    useState("");
 
   const inputHandler = (
     e: React.ChangeEvent<HTMLInputElement>

@@ -14,22 +14,15 @@ export const removeDuplicateArticles = (
   articles: IArticle[]
 ) => {
   
-  console.debug("Arrticles",articles);
-  
   // remove duplicate articles
-
-
-
-
-
-  // const uniqueArticles = articles.filter(
-  //   (article, index, self) =>
-  //     index ===
-  //     articles.findIndex(
-  //       (a) => a.guid === article.guid
-  //     )
-  // );
-return articles;
+  const uniqueArticles = articles.filter(
+    (article, index, self) =>
+      index ===
+      self.findIndex(
+        (a) => a.guid === article.guid
+      )
+  );
+return uniqueArticles;
   
 };
 

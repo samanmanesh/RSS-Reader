@@ -22,8 +22,8 @@ const parseCDATA = (str: string) => {
 const convertItemToArticle = (
   item: Element
 ): IArticle => {
-  // id: uuidv4(),
   const article: IArticle = {
+    id: uuidv4(),
     guid: "",
     title: "",
     pubdate: new Date(),
