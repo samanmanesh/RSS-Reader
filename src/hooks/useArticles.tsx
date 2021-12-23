@@ -37,15 +37,8 @@ const useArticles = () => {
   }, []);
 
   useEffect(() => {
-    const sortedArticles = refreshArticles();
-    handleAddArticles(sortedArticles);
+    refreshArticles();
   }, [feeds]);
-
-  const handleAddArticles = (
-    articles: IArticle[]
-  ) => {
-    setArticles(articles);
-  };
 
   const refreshArticles = async () => {
     // 1. Get all articles from all feeds
@@ -65,8 +58,7 @@ const useArticles = () => {
     // 3. Save them in state
     //setArticles(uniqueArticles);
     //setArticles(sortedArticles);
-    // setArticles(sortedArticles);
-    return sortedArticles;
+    setArticles(sortedArticles);
   };
 
   const fetchArticles = async (): Promise<
@@ -74,15 +66,32 @@ const useArticles = () => {
   > => {
     let articleResults: IArticle[] = [];
     if (feeds.length > 0) {
-      feeds.forEach(async (feed) => {
-        const url = feed.link;
-        const results = await getRSSFeedData(url);
-        //console.log("results",results)
-
-        // articleResults.push(...results);
-        //add results to articleResults
-        articleResults.push(...results);
-      });
+      for (const feed of feeds) {
+        const feedArticles = await getRSSFeedData(
+          feed.link
+        );
+        articleResults = [
+          ...articleResults,
+          ...feedArticles,
+        ];
+      }
+      // const _getFeed = async (feed) => {
+      //   const url = feed.link;
+      //   const results = await getRSSFeedData(url);
+      //   console.debug(
+      //     "adding",
+      //     articleResults,
+      //     results
+      //   );
+      //   return results;
+      //   // articleResults = [
+      //   //   ...articleResults,
+      //   //   ...results,
+      //   // ];
+      //   // results.forEach(item => {
+      //   //   articleResults.push(item);
+      //   // });
+      // };
 
       console.debug(
         "articleResults",

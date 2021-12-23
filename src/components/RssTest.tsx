@@ -14,13 +14,13 @@ const RssTest = (): JSX.Element => {
   const [rssUrl, setRssUrl] =
     useState(joshRSS);
 
-  const { articles, addArticles } = useArticles();
+  const { articles,  } = useArticles();
 
   const handleGetFeed = async (e) => {
     e.preventDefault();
     console.debug("handleGetFeed >>");
     const results = await getRSSFeedData(rssUrl);
-    addArticles(results);
+    //addArticles(results);
     setRssUrl("");
   };
 
