@@ -18,6 +18,7 @@ export default function Home() {
   }, []);
 
   console.debug("localFeeds", localFeeds);
+  console.debug("articles in index" , articles);
   const cssTricksRSS =
     "https://css-tricks.com/feed/";
   const joshRSS =
@@ -47,7 +48,7 @@ export default function Home() {
       {/* <RssTest /> */}
 
       {/* showing all articles */}
-      {/* {articles.map((item) => {
+      {articles.map((item) => {
         return (
           <div
             className="bg-gray-100 p-2 rounded-sm mb-4"
@@ -78,9 +79,9 @@ export default function Home() {
             )}
           </div>
         );
-      })} */}
+      })}
       {/* just showing the feeds( url and name) */}
-      {feeds.map((item) => {
+      {/* {feeds.map((item) => {
         return (
           <div
             className="bg-gray-100 p-2 rounded-sm mb-4"
@@ -94,7 +95,7 @@ export default function Home() {
             <a href={item.link}>{item.link}</a>
           </div>
         );
-      })}
+      })} */}
     </div>
   );
 }

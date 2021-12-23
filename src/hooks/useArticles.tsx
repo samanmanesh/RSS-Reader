@@ -37,8 +37,15 @@ const useArticles = () => {
   }, []);
 
   useEffect(() => {
-    refreshArticles();
+    const sortedArticles = refreshArticles();
+    handleAddArticles(sortedArticles);
   }, [feeds]);
+
+  const handleAddArticles = (
+    articles: IArticle[]
+  ) => {
+    setArticles(articles);
+  };
 
   const refreshArticles = async () => {
     // 1. Get all articles from all feeds
@@ -47,23 +54,40 @@ const useArticles = () => {
     // 2. Sort them and remove duplicates
     const sortedArticles =
       sortArticles(newArticles);
-    const uniqueArticles =
-      removeDuplicateArticles(sortedArticles);
+    console.debug(
+      "sortedArticles",
+      sortedArticles
+    );
+    // const uniqueArticles =
+    //   removeDuplicateArticles(sortedArticles);
+    //   console.debug("uniqueArticles", uniqueArticles);
 
     // 3. Save them in state
-    setArticles(uniqueArticles);
+    //setArticles(uniqueArticles);
+    //setArticles(sortedArticles);
+    // setArticles(sortedArticles);
+    return sortedArticles;
   };
 
   const fetchArticles = async (): Promise<
     IArticle[]
   > => {
-    const articleResults: IArticle[] = [];
+    let articleResults: IArticle[] = [];
     if (feeds.length > 0) {
       feeds.forEach(async (feed) => {
         const url = feed.link;
         const results = await getRSSFeedData(url);
+        //console.log("results",results)
+
+        // articleResults.push(...results);
+        //add results to articleResults
         articleResults.push(...results);
       });
+
+      console.debug(
+        "articleResults",
+        articleResults
+      );
     }
     return articleResults;
   };
@@ -112,7 +136,9 @@ const useArticles = () => {
 
   const addFeed = (feed: IFeed) => {
     //prevents and remove duplicate feed
-    const newFeeds = feeds.filter((prevFeed) => prevFeed.link !== feed.link);
+    const newFeeds = feeds.filter(
+      (prevFeed) => prevFeed.link !== feed.link
+    );
     setFeeds([...newFeeds, feed]);
     setLocalFeeds([...newFeeds, feed]);
 

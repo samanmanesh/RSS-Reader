@@ -241,7 +241,7 @@ const Sidebar = () => {
             />
           </div>
           <div className="flex-grow mt-5 flex flex-col ">
-            <nav className="flex-1 px-2 pb-4 space-y-1 bg-blue-400">
+            <nav className="flex-1 px-2 pb-4 space-y-1 ">
               {navigation.map((item) => (
                 <SidebarItem
                   key={item.name}
@@ -250,9 +250,12 @@ const Sidebar = () => {
                 />
               ))}
             </nav>
-            <section className="flex-grow bg-red-400 ">
-                <span> Feeds </span>
-               <SidebarFeedItem/> 
+            <section className="flex-grow  ">
+              <span className=" rounded-md py-2 px-2  text-base font-medium">
+                {" "}
+                Feeds{" "}
+              </span>
+              <SidebarFeedItem />
             </section>
 
             <button
