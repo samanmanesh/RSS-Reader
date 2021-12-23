@@ -111,8 +111,13 @@ const useArticles = () => {
   // };
 
   const addFeed = (feed: IFeed) => {
-    setFeeds((prev) => [...prev, feed]);
-    setLocalFeeds([...feeds, feed]); //! why we add feed to feeds here as it already added feeds in global state?
+    //prevents and remove duplicate feed
+    const newFeeds = feeds.filter((prevFeed) => prevFeed.link !== feed.link);
+    setFeeds([...newFeeds, feed]);
+    setLocalFeeds([...newFeeds, feed]);
+
+    // setFeeds((prev) => [...prev, feed]);
+    // setLocalFeeds([...feeds, feed]); //! why we add feed to feeds here as it already added feeds in global state?
   };
 
   return {

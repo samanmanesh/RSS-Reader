@@ -72,8 +72,7 @@ const Sidebar = () => {
     useModal();
   const { sidebarOpen, setSidebarOpen } =
     useSidebar();
-  const { articles,  addFeed } =
-    useArticles();
+  const { articles, addFeed } = useArticles();
   const [selectNavItem, setSelectNavItem] =
     useState("");
 
@@ -89,6 +88,9 @@ const Sidebar = () => {
     "https://css-tricks.com/feed/";
   const joshRSS =
     "https://www.joshwcomeau.com/rss.xml";
+
+  const NewYorkTimesRSS =
+    "https://rss.nytimes.com/services/xml/rss/nyt/World.xml";
 
   const [rssUrl, setRssUrl] =
     useState(cssTricksRSS);
