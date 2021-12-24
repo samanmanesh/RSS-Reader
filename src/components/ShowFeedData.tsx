@@ -39,7 +39,7 @@ export default function ShowFeedData({
         />
       </div>
 
-      {Object.entries(article).map(
+      {/* {Object.entries(article).map(
         ([key, value]) => {
           return (
             <div key={key} className="mb-2">
@@ -58,7 +58,7 @@ export default function ShowFeedData({
             </div>
           );
         }
-      )}
+      )} */}
     </div>
   );
 }

@@ -119,10 +119,25 @@ export const getRSSFeedData = async (
   const items =
     documentXML.querySelectorAll("item");
 
-    // console.debug("items", items);
+    console.debug("items", items);
   const articles = Array.from(items).map(
     convertItemToArticle
   );
 // console.debug("articles in rss.utils", articles);
   return articles;
+};
+
+export const getRSSFeedName = (
+  url: string
+) => {
+  if (!validateRSSUrl(url)) {
+    console.error("invalid url", url);
+    return;
+  }
+  const match = url.match(
+    /^(?:https?:)?(?:\/\/)?([^\/\?]+)/i
+  );
+  const hostname = match && match[1];
+  console.debug("hostname", hostname);
+  return hostname;
 };
