@@ -73,7 +73,7 @@ const Sidebar = () => {
     useModal();
   const { sidebarOpen, setSidebarOpen } =
     useSidebar();
-  const { articles, addFeed } = useArticles();
+  const { articles, addFeed } = useArticles(true);
   const [selectNavItem, setSelectNavItem] =
     useState("");
 

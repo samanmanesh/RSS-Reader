@@ -56,7 +56,8 @@ export default function Home() {
       {/* showing image if has, title, author name, feed name and date  */}
       {articles.map((item) => {
         return (
-          <Link href={'/articles/' + item.id } key={item.id} >
+          <Link href={'/articles/' + item.id } key={item.id}  >
+            
             <div
               className="bg-gray-100 p-2 rounded-sm mb-4"
               key={item.guid}

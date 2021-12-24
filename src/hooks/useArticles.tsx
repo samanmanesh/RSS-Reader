@@ -22,41 +22,35 @@ const feedsState = atom({
 //   link: string;
 // }
 
-const useArticles = () => {
+const useArticles = (fetchOnMount = false) => {
   const [articles, setArticles] =
     useRecoilState<IArticle[]>(articleState);
   const [feeds, setFeeds] =
     useRecoilState<IFeed[]>(feedsState);
+
   const [localFeeds, setLocalFeeds] =
     useLocalStorage<IFeed[]>("feeds");
+  // localArticles
+  const [localArticles, setLocalArticles] =
+    useLocalStorage<IArticle[]>("articles");
 
   useEffect(() => {
-    if (localFeeds) {
+    if (!fetchOnMount) return;
+    if (localFeeds && !feeds) {
       setFeeds(localFeeds);
     }
   }, []);
 
-  useEffect(() => {
-    refreshArticles();
-  }, [feeds]);
 
   const refreshArticles = async () => {
+    alert('refreshing articles!!!!')
+
     //? 1. Get all articles from all feeds
     const newArticles = await fetchArticles();
 
     //? 2. Sort them and remove duplicates
     const sortedArticles =
         sortArticles(newArticles);
-    console.debug(
-      "sortedArticles",
-      sortedArticles
-    );
-
-    //  const uniqueArticles =
-    //    removeDuplicateArticles(sortedArticles);
-    //   console.debug("uniqueArticles", uniqueArticles);
-
-    //? 3. Save them in state
     
     setArticles(sortedArticles);
   };
@@ -65,6 +59,7 @@ const useArticles = () => {
     IArticle[]
   > => {
     let articleResults: IArticle[] = [];
+    
     if (feeds.length > 0) {
       for (const feed of feeds) {
         const feedArticles = await getRSSFeedData(
@@ -75,23 +70,6 @@ const useArticles = () => {
           ...feedArticles,
         ];
       }
-      // const _getFeed = async (feed) => {
-      //   const url = feed.link;
-      //   const results = await getRSSFeedData(url);
-      //   console.debug(
-      //     "adding",
-      //     articleResults,
-      //     results
-      //   );
-      //   return results;
-      //   // articleResults = [
-      //   //   ...articleResults,
-      //   //   ...results,
-      //   // ];
-      //   // results.forEach(item => {
-      //   //   articleResults.push(item);
-      //   // });
-      // };
 
       console.debug(
         "articleResults",
