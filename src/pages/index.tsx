@@ -1,6 +1,6 @@
 import RssTest from "components/RssTest";
 import { useEffect, useState } from "react";
-import { getRSSFeedData } from "utils/rss.utils";
+import { getRSSFeed, getRSSFeedData, validateRSSUrl } from "utils/rss.utils";
 import useArticles from "hooks/useArticles";
 import Link from "next/link";
 
@@ -49,6 +49,20 @@ export default function Home() {
   //   setRssUrl("");
   // };
   //Todo show the feed name 
+  const getRSSFeedNameHandler =  (article: IArticle) => {
+
+    // const RSSFeedName= await getRSSFeed(article.guid);
+    // console.debug("RSSFeedName", RSSFeedName.name);
+    if (!validateRSSUrl(article.guid)) {
+      console.error("invalid url", article.guid);
+      return;
+    }
+    const match = article.guid.match(/^(?:https?:)?(?:\/\/)?([^\/\?]+)/i);
+    const hostname = match && match[1];
+    console.debug("hostname", hostname);  
+    return hostname ;
+  }
+
   return (
     <div className="h-full">
       {/* <RssTest /> */}
@@ -77,7 +91,7 @@ export default function Home() {
               </h2>
 
               <h3 className="text-xl font-bold mb-2">
-                Feed Name
+                {getRSSFeedNameHandler(item)}
               </h3>
 
               <h4 className="text-xl font-bold mb-2">
@@ -110,6 +124,8 @@ export default function Home() {
     
   );
 }
+
+
 
 
 //       <div

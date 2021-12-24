@@ -65,7 +65,7 @@ const convertItemToArticle = (
   // });
 };
 
-const validateRSSUrl = (url: string): boolean => {
+export const validateRSSUrl = (url: string): boolean => {
   const rssRegex =
     /(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/;
   if (rssRegex.test(url)) {
