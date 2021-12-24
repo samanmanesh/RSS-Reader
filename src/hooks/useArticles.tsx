@@ -22,7 +22,7 @@ const feedsState = atom({
 //   link: string;
 // }
 
-const useArticles = (fetchOnMount = false) => {
+const useArticles = (shouldFetch = false) => {
   const [articles, setArticles] =
     useRecoilState<IArticle[]>(articleState);
   const [feeds, setFeeds] =
@@ -30,28 +30,27 @@ const useArticles = (fetchOnMount = false) => {
 
   const [localFeeds, setLocalFeeds] =
     useLocalStorage<IFeed[]>("feeds");
-  // localArticles
-  const [localArticles, setLocalArticles] =
-    useLocalStorage<IArticle[]>("articles");
 
   useEffect(() => {
-    if (!fetchOnMount) return;
-    if (localFeeds && !feeds) {
+    if (!shouldFetch) return;
+    if (localFeeds && feeds.length === 0) {
       setFeeds(localFeeds);
     }
   }, []);
 
+  useEffect(() => {
+    if (!shouldFetch) return;
+    refreshArticles();
+  }, [feeds]);
 
   const refreshArticles = async () => {
-    alert('refreshing articles!!!!')
-
     //? 1. Get all articles from all feeds
     const newArticles = await fetchArticles();
 
     //? 2. Sort them and remove duplicates
     const sortedArticles =
-        sortArticles(newArticles);
-    
+      sortArticles(newArticles);
+
     setArticles(sortedArticles);
   };
 
@@ -59,23 +58,21 @@ const useArticles = (fetchOnMount = false) => {
     IArticle[]
   > => {
     let articleResults: IArticle[] = [];
-    
-    if (feeds.length > 0) {
-      for (const feed of feeds) {
-        const feedArticles = await getRSSFeedData(
-          feed.link
-        );
-        articleResults = [
-          ...articleResults,
-          ...feedArticles,
-        ];
-      }
 
-      console.debug(
-        "articleResults",
-        articleResults
-      );
+    if (feeds.length <= 0) {
+      return articleResults;
     }
+
+    for (const feed of feeds) {
+      const feedArticles = await getRSSFeedData(
+        feed.link
+      );
+      articleResults = [
+        ...articleResults,
+        ...feedArticles,
+      ];
+    }
+
     return articleResults;
   };
 

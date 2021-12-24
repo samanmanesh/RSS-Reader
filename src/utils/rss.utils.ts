@@ -19,11 +19,16 @@ const parseCDATA = (str: string) => {
   return str;
 };
 
+const generateId = (title: string, pubdate: Date) => {
+  const fixedTitle = title.replaceAll(" ", "-").trim().toLowerCase();
+  return `${fixedTitle}-${pubdate.getTime()}`;
+};
+
 const convertItemToArticle = (
   item: Element
 ): IArticle => {
   const article: IArticle = {
-    id: uuidv4(),
+    id: "",
     guid: "",
     title: "",
     pubdate: new Date(),
@@ -42,6 +47,8 @@ const convertItemToArticle = (
 
     article[key] = value;
   }
+
+  article.id = generateId(article.title, article.pubdate);
 
   return article;
 
