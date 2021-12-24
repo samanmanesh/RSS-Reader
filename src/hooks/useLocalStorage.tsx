@@ -7,6 +7,7 @@ export default function useLocalStorage<T>(
 
   const [value, setValue] = useState<T>(() => {
     try {
+      //used window.localStorage to get and set the value
       //window.localStorage.setItem(actualKey, "");
       const item =
         localStorage.getItem(actualKey);

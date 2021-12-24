@@ -119,9 +119,10 @@ export const getRSSFeedData = async (
   const items =
     documentXML.querySelectorAll("item");
 
+    console.debug("items", items);
   const articles = Array.from(items).map(
     convertItemToArticle
   );
-
+console.debug("articles in rss.utils", articles);
   return articles;
 };

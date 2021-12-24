@@ -6,6 +6,7 @@ import React, {
 import { useRouter } from "next/router";
 import useArticles from "hooks/useArticles";
 
+{/**pass the feed name   */}
 export default function DynamicRoute(): ReactElement {
   const router = useRouter();
   const { articles } = useArticles();
