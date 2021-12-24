@@ -9,6 +9,9 @@ import {
 import useArticles from "hooks/useArticles";
 import Link from "next/link";
 
+const color = 'orange'
+
+const bgColor = `bg-orange-300`;
 // const routes = [
 //   {}
 
@@ -63,6 +66,8 @@ export default function Home() {
     <div className="h-full">
       {/* <RssTest /> */}
 
+
+
       {/* showing image if has, title, author name, feed name and date  */}
       {articles.map((item) => {
         return (
@@ -70,38 +75,34 @@ export default function Home() {
             href={"/articles/" + item.id}
             key={item.id}
           >
-            <div
-              className="bg-gray-100 p-2 rounded-sm mb-4  cursor-pointer grid grid-flow-row-dense grid-cols-2 "
+            <button
+              className="block w-full outline-none transition focus:ring-2 
+              focus:ring-offset-4 focus:ring-indigo-500  bg-gray-100 p-2 rounded-sm mb-4 cursor-pointer "
               key={item.guid}
             >
-              {/* {item.imgage && (
-                <div className="w-4 h-2 mb-8">
-                  Image Wrapper
-                </div>
-              )} */}
-
-              <h1 className="  text-2xl font-bold mb-2 ">
-                {item.title}
-              </h1>
-
-              <div className="  bg-orange-400 rounded-md font-bold text-sm mb-auto p-1  ">
-                
+              <div className="flex items-center justify-between">
+                <h1 className="text-2xl font-bold mb-2 ">
+                  {item.title}
+                </h1>
+                <div className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium ${bgColor} `}>
                   {getRSSFeedNameHandler(item)}
-                
+                </div>
               </div>
-              <h2 className="text-l font-bold mb-2 ">
-                {/* Author Name */}
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: item["dc:creator"],
-                  }}
-                />
-              </h2>
+              <div className="flex items-center justify-between">
+                <h2 className="text-md  mb-2 ">
+                  {/* Author Name */}
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: item["dc:creator"],
+                    }}
+                  />
+                </h2>
 
-              <h4 className="text-l font-bold mb-2 text-right">
-                {/* Date */}
-                {item.pubdate.toDateString()}
-              </h4>
+                <h4 className="text-sm font-bold mb-2 text-right">
+                  {/* Date */}
+                  {item.pubdate.toDateString()}
+                </h4>
+              </div>
 
               {/* {Object.entries(item).map(
               ([key, value]) => {
@@ -121,7 +122,7 @@ export default function Home() {
                 );
               }
             )} */}
-            </div>
+            </button>
           </Link>
         );
       })}

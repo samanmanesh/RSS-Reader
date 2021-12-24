@@ -3,6 +3,8 @@ module.exports = {
     "./src/components/**/*.{ts,tsx,js,jsx}",
     "./src/pages/**/*.{ts,tsx,js,jsx}",
   ], 
+  // keep styles
+  
   darkMode: 'class',
   theme: {
     container: {
