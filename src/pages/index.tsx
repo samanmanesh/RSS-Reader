@@ -15,13 +15,13 @@ import Link from "next/link";
 export default function Home() {
   const { articles, localFeeds, feeds } =
     useArticles();
-  useEffect(() => {
-    if (window) {
-      document.documentElement.classList.add(
-        "dark"
-      );
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (window) {
+  //     document.documentElement.classList.add(
+  //       "dark"
+  //     );
+  //   }
+  // }, []);
 
   console.debug("localFeeds", localFeeds);
   console.debug("articles in index", articles);

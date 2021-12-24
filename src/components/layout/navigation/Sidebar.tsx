@@ -77,13 +77,13 @@ const Sidebar = () => {
   const [selectNavItem, setSelectNavItem] =
     useState("");
 
-  useEffect(() => {
-    if (window) {
-      document.documentElement.classList.add(
-        "dark"
-      );
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (window) {
+  //     document.documentElement.classList.add(
+  //       "dark"
+  //     );
+  //   }
+  // }, []);
 
   const cssTricksRSS =
     "https://css-tricks.com/feed/";

@@ -23,6 +23,7 @@ export default function DynamicRoute(): ReactElement {
 
   return (
     <div>
+      
       <h1>{router.query.id}</h1>
       {/* {item.title} */}
       {article ? (

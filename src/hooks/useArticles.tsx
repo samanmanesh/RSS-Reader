@@ -51,6 +51,7 @@ const useArticles = (shouldFetch = false) => {
     const sortedArticles =
       sortArticles(newArticles);
 
+    //? 3. Set the articles state 
     setArticles(sortedArticles);
   };
 

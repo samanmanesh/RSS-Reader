@@ -7,7 +7,13 @@ interface Props {
 export default function ShowFeedData({
   article,
 }: Props): ReactElement {
-  return <div>{article.title}</div>;
+  return (
+  <div>
+    
+    {/* show the article data here */}
+    {article.title}
+    
+    </div>);
 }
 
 //       <div
