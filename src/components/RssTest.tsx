@@ -18,7 +18,7 @@ const RssTest = (): JSX.Element => {
 
   const handleGetFeed = async (e) => {
     e.preventDefault();
-    console.debug("handleGetFeed >>");
+    // console.debug("handleGetFeed >>");
     const results = await getRSSFeedData(rssUrl);
     //addArticles(results);
     setRssUrl("");

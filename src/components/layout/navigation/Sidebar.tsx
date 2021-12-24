@@ -114,9 +114,9 @@ const Sidebar = () => {
   }
   const handleGetFeed = async (e) => {
     e.preventDefault();
-    console.debug("handleGetFeed >>");
+    // console.debug("handleGetFeed >>");
     const results = await getRSSFeed(rssUrl);
-    console.debug("results is", results);
+    // console.debug("results is", results);
 
     if (results) addFeed(results);
     setRssUrl("");
@@ -130,7 +130,7 @@ const Sidebar = () => {
       }
     });
   };
-  console.log("selectNavItem", selectNavItem);
+  // console.log("selectNavItem", selectNavItem);
 
   return (
     <>
@@ -264,7 +264,7 @@ const Sidebar = () => {
             >
               Add New Item
             </button>
-            {console.log(showModal)}
+            {/* {console.log(showModal)} */}
           </div>
           <Modal
             title="hello"

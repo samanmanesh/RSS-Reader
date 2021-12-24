@@ -131,7 +131,7 @@ const useArticles = (shouldFetch = false) => {
     // setLocalFeeds([...feeds, feed]); //! why we add feed to feeds here as it already added feeds in global state?
   };
 
-  console.debug("articles#", articles);
+  // console.debug("articles#", articles);
   return {
     articles,
     feeds,

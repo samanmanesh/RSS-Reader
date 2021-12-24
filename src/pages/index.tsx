@@ -23,8 +23,8 @@ export default function Home() {
   //   }
   // }, []);
 
-  console.debug("localFeeds", localFeeds);
-  console.debug("articles in index", articles);
+  // console.debug("localFeeds", localFeeds);
+  // console.debug("articles in index", articles);
   const cssTricksRSS =
     "https://css-tricks.com/feed/";
   const joshRSS =
