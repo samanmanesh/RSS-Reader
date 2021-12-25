@@ -36,3 +36,6 @@
   @apply px-4 py-2 text-base md:px-6 md:py-3 md:text-lg rounded-md;
 }
 
+.tag {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-indigo-300;
+}

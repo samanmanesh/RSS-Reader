@@ -41,7 +41,7 @@ Requires JS
 
 
 import TopBar from "./layout/TopBar";
-import Dashboard from "./layout/Dashboard";
+import Dashboard from "./layout/FeedItem";
 
 
 

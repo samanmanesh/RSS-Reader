@@ -8,6 +8,7 @@ interface IArticle {
   link?: string;
   description?: string;
   content?: string;
+  imageSrc?: string;
 }
 
 interface IFeed {

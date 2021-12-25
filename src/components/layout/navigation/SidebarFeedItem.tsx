@@ -12,10 +12,11 @@ export default function SidebarFeedItem(): ReactElement {
         <Link
           href={`/feeds/${feed.name}`}
           key={feed.name}
+          
         >
           <li
             key={feed.link}
-            className="mb-2 p-1 pl-10 "
+            className="mb-2 p-1 pl-10 cursor-pointer"
           >
             {feed.name}
           </li>

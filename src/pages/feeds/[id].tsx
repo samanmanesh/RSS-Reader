@@ -4,7 +4,7 @@ import React, {
 } from "react";
 import useArticles from "hooks/useArticles";
 import { useRouter } from "next/router";
-import Dashboard from "components/layout/Dashboard";
+import Dashboard from "components/layout/FeedItem";
 
 export default function Dynamic(): ReactElement {
   const router = useRouter();

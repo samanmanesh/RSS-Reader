@@ -19,9 +19,33 @@ const parseCDATA = (str: string) => {
   return str;
 };
 
-const generateId = (title: string, pubdate: Date) => {
-  const fixedTitle = title.replaceAll(" ", "-").trim().toLowerCase();
+const generateId = (
+  title: string,
+  pubdate: Date
+) => {
+  const fixedTitle = title
+    .replaceAll(" ", "-")
+    .trim()
+    .toLowerCase();
   return `${fixedTitle}-${pubdate.getTime()}`;
+};
+
+const getImageInContent = (
+  content: string
+): string => {
+  const documentXML =
+    new window.DOMParser().parseFromString(
+      content,
+      "text/html"
+    );
+
+  const image = documentXML.querySelector("img");
+
+  if (image) {
+    return image.getAttribute("src");
+  }
+
+  return "";
 };
 
 const convertItemToArticle = (
@@ -32,6 +56,7 @@ const convertItemToArticle = (
     id: "",
     guid: "",
     title: "",
+    imageSrc: "",
     pubdate: new Date(),
   };
 
@@ -48,8 +73,14 @@ const convertItemToArticle = (
 
     article[key] = value;
   }
+  console.debug(">>", item.innerHTML);
+  article.imageSrc = getImageInContent(article['content:encoded']);
+
   article.feedName = getRSSFeedName(article.guid);
-  article.id = generateId(article.title, article.pubdate);
+  article.id = generateId(
+    article.title,
+    article.pubdate
+  );
 
   return article;
 
@@ -66,7 +97,9 @@ const convertItemToArticle = (
   // });
 };
 
-export const validateRSSUrl = (url: string): boolean => {
+export const validateRSSUrl = (
+  url: string
+): boolean => {
   const rssRegex =
     /(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/;
   if (rssRegex.test(url)) {
@@ -75,22 +108,20 @@ export const validateRSSUrl = (url: string): boolean => {
   return false;
 };
 
-export const getRSSFeed = async (url: string): Promise<IFeed> => {
-  
-    if (!validateRSSUrl(url)) {
-      console.error("invalid url", url);
-      return;
-    }
+export const getRSSFeed = async (
+  url: string
+): Promise<IFeed> => {
+  if (!validateRSSUrl(url)) {
+    console.error("invalid url", url);
+    return;
+  }
 
-    const feed: IFeed = {
-      name: getRSSFeedName(url),
-      link: url,
-    }
-    return feed;
-  } 
-
-
-
+  const feed: IFeed = {
+    name: getRSSFeedName(url),
+    link: url,
+  };
+  return feed;
+};
 
 export const getRSSFeedData = async (
   url: string
@@ -115,17 +146,15 @@ export const getRSSFeedData = async (
   const items =
     documentXML.querySelectorAll("item");
 
-    console.debug("items", items);
+  console.debug("items", items);
   const articles = Array.from(items).map(
     convertItemToArticle
   );
-// console.debug("articles in rss.utils", articles);
+  // console.debug("articles in rss.utils", articles);
   return articles;
 };
 
-export const getRSSFeedName = (
-  url: string
-) => {
+export const getRSSFeedName = (url: string) => {
   if (!validateRSSUrl(url)) {
     console.error("invalid url", url);
     return;

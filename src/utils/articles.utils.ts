@@ -7,7 +7,7 @@ export const sortArticles = (
     );
   });
 
-  return sortedArticles;
+  return sortedArticles.reverse();
 };
 
 export const removeDuplicateArticles = (

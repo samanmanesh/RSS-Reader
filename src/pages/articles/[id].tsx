@@ -1,4 +1,4 @@
-import ShowFeedData from "components/ShowFeedData";
+import ArticleView from "components/ArticleView";
 import React, {
   ReactElement,
   useMemo,
@@ -6,7 +6,7 @@ import React, {
 import { useRouter } from "next/router";
 import useArticles from "hooks/useArticles";
 
-{/**pass the feed name   */}
+
 export default function DynamicRoute(): ReactElement {
   const router = useRouter();
   const { articles } = useArticles();
@@ -22,7 +22,7 @@ export default function DynamicRoute(): ReactElement {
     <div>
     
       {article ? (
-        <ShowFeedData article={article} />
+        <ArticleView article={article} />
       ) : (
         <div>No article found</div>
       )}
