@@ -215,6 +215,15 @@ const Sidebar = () => {
                   ))}
                 </nav>
               </div>
+            
+              <section className="flex-grow  ">
+              <span className=" rounded-md py-2 px-2  text-base font-medium">
+                
+                Feeds
+              </span>
+              <SidebarFeedItem />
+            </section>
+
               <button
                 onClick={openModal}
                 className="btn btn-lg btn-light mx-auto mb-6"
@@ -252,8 +261,8 @@ const Sidebar = () => {
             </nav>
             <section className="flex-grow  ">
               <span className=" rounded-md py-2 px-2  text-base font-medium">
-                {" "}
-                Feeds{" "}
+                
+                Feeds
               </span>
               <SidebarFeedItem />
             </section>

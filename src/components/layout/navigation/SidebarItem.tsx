@@ -47,23 +47,24 @@ export default function SidebarItem({
             )}
             aria-hidden="true"
           />
+          
           {item.name}
         </a>
       </Link>
       {/* {item.name === "Feeds" && item.current &&  */}
-      {item.name === "Feeds" &&
+      {/* {item.name === "Feeds" &&
       (
         <ul className="p-2">
           {feeds.map((feed) => (
             <li
               key={feed.link}
-              className="mb-2 p-1 pl-10 "
+              className="mb-2 p-1 pl-10 bg-blue-600"
             >
               {feed.name}
             </li>
           ))}
         </ul>
-      )}
+      )} */}
     </div>
   );
 }

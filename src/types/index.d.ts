@@ -1,5 +1,6 @@
 
 interface IArticle {
+  feedName?: string;
   id: string;
   guid: string;
   title: string;

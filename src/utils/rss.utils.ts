@@ -28,6 +28,7 @@ const convertItemToArticle = (
   item: Element
 ): IArticle => {
   const article: IArticle = {
+    feedName: "",
     id: "",
     guid: "",
     title: "",
@@ -47,7 +48,8 @@ const convertItemToArticle = (
 
     article[key] = value;
   }
-
+  //todo add somehow url to article to use otherwhere
+  // article.feedName = getRSSFeedName(url);
   article.id = generateId(article.title, article.pubdate);
 
   return article;

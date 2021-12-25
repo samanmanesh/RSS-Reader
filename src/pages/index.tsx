@@ -1,9 +1,6 @@
 import RssTest from "components/RssTest";
-import { useEffect, useState } from "react";
 import {
-  getRSSFeed,
-  getRSSFeedData,
-  validateRSSUrl,
+
   getRSSFeedName,
 } from "utils/rss.utils";
 import useArticles from "hooks/useArticles";
@@ -53,8 +50,8 @@ export default function Home() {
   //   addArticles(results);
   //   setRssUrl("");
   // };
-  console.debug("articles", articles);
-  //Todo show the feed name
+  
+  
   const getRSSFeedNameHandler = (
     article: IArticle
   ) => {
