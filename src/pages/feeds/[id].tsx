@@ -4,7 +4,7 @@ import React, {
 } from "react";
 import useArticles from "hooks/useArticles";
 import { useRouter } from "next/router";
-import Dashboard from "components/layout/FeedItem";
+import FeedItem from "components/layout/FeedItem";
 
 export default function Dynamic(): ReactElement {
   const router = useRouter();
@@ -20,7 +20,10 @@ export default function Dynamic(): ReactElement {
   return (
     <div>
       {filteredArticles.map((article) => (
-        <Dashboard key={article.id} item={article} />
+        <div className="pt-4 space-y-6">
+          <FeedItem key={article.id} item={article} />
+
+        </div>
       ))}
     </div>
   );
