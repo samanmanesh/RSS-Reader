@@ -37,9 +37,7 @@ interface Props {}
 
 export default function TopBar({}: Props): ReactElement {
   const { setSidebarOpen } = useSidebar();
-  const { search, setSearch } = useSearch()
-  const router = useRouter();
-  const { articles } = useArticles();
+  const { search, setSearch } = useSearch();
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -57,7 +55,7 @@ export default function TopBar({}: Props): ReactElement {
       setSearch(e.target.value);
     }
   };
-  
+
   {
     /* sidebar button& search & notification &profile dropdown  wrapper */
   }
