@@ -5,30 +5,20 @@ import React, { ReactElement } from "react";
 
 export default function SidebarFeedItem(): ReactElement {
   const { feeds } = useArticles();
-  const { changeFilterFeed } = useSidebar();
-  const filterHandler = (feed: string) => {
-    console.debug("feed", feed);
-    changeFilterFeed(feed);
-  };
 
   return (
     <ul className="p-2">
       {feeds.map((feed) => (
-        <Link href={`/feeds/${feed.name}`} key={feed.name}>
-          <button
-            onClick={() =>
-              filterHandler(feed.link)
-            }
-            key={feed.name}
-            className=""
+        <Link
+          href={`/feeds/${feed.name}`}
+          key={feed.name}
+        >
+          <li
+            key={feed.link}
+            className="mb-2 p-1 pl-10 "
           >
-            <li
-              key={feed.link}
-              className="mb-2 p-1 pl-10 "
-            >
-              {feed.name}
-            </li>
-          </button>
+            {feed.name}
+          </li>
         </Link>
       ))}
     </ul>

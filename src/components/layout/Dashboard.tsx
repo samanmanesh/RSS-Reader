@@ -1,24 +1,63 @@
+import Link from "next/link";
 import React, { ReactElement } from "react";
+import { getRSSFeedName } from "utils/rss.utils";
 
-interface Props {}
+interface Props {
+  item:IArticle;
+}
 
-export default function Dashboard({}: Props): ReactElement {
+export default function Dashboard({item}: Props): ReactElement {
+
+  const getRSSFeedNameHandler = (
+    article: IArticle
+  ) => {
+    const hostname = getRSSFeedName(article.guid);
+   
+    console.debug(
+      ">",
+      hostname,
+      article.feedName
+    );
+   
+    return hostname;
+  };
+  
   return (
-    <main className="flex-1">
-      <div className="py-6">
-        <div className="px-4 sm:px-6 md:px-0">
-          <h1 className="text-2xl font-semibold text-gray-900">
-            Dashboard
-          </h1>
-        </div>
-        <div className="px-4 sm:px-6 md:px-0">
-          {/* Replace with your content */}
-          <div className="py-4">
-            <div className="h-96 border-4 border-dashed border-gray-200 rounded-lg" />
-          </div>
-          {/* /End replace */}
+    <Link
+    href={"/articles/" + item.id}
+    key={item.id}
+  >
+    <button
+      className="block w-full outline-none transition focus:ring-2 
+      focus:ring-offset-4 focus:ring-indigo-500  bg-gray-100 p-2 rounded-sm mb-4 cursor-pointer "
+      key={item.guid}
+    >
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold mb-2 ">
+          {item.title}
+        </h1>
+        <div
+          className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-indigo-300 `}
+        >
+          {getRSSFeedNameHandler(item)}
         </div>
       </div>
-    </main>
+      <div className="flex items-center justify-between">
+        <h2 className="text-md  mb-2 ">
+          {/* Author Name */}
+          <span
+            dangerouslySetInnerHTML={{
+              __html: item["dc:creator"],
+            }}
+          />
+        </h2>
+
+        <h4 className="text-sm font-bold mb-2 text-right">
+          {/* Date */}
+          {item.pubdate.toDateString()}
+        </h4>
+      </div>
+    </button>
+  </Link>
   );
 }

@@ -1,9 +1,18 @@
 import React, { ReactElement } from "react";
+import { getRSSFeedName } from "utils/rss.utils";
 
 interface Props {
   article: IArticle;
 }
-//Todo gets the feed name by param to show */
+
+const getRSSFeedNameHandler = (
+  article: IArticle
+) => {
+  const hostname = getRSSFeedName(article.guid);
+  console.debug(">", hostname, article.feedName);
+  return hostname;
+};
+
 export default function ShowFeedData({
   article,
 }: Props): ReactElement {
@@ -22,13 +31,11 @@ export default function ShowFeedData({
             __html: article["dc:creator"],
           }}
         />
-        {/**show the feed name */}
+        {/*//todo show the feed name */}
 
-        <span
-          dangerouslySetInnerHTML={{
-            __html: article["d"],
-          }}
-        />
+        <div>
+          {getRSSFeedNameHandler(article)}
+        </div>
       </div>
 
       <div className="prose prose-headings:text-purple-500">
@@ -38,27 +45,6 @@ export default function ShowFeedData({
           }}
         />
       </div>
-
-      {/* {Object.entries(article).map(
-        ([key, value]) => {
-          return (
-            <div key={key} className="mb-2">
-              {console.debug(key)}
-              <span className="font-bold bg-red-400">
-                {key}
-              </span>
-
-              <div className="prose prose-headings:text-purple-500">
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: value,
-                  }}
-                />
-              </div>
-            </div>
-          );
-        }
-      )} */}
     </div>
   );
 }

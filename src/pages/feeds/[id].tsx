@@ -4,6 +4,7 @@ import React, {
 } from "react";
 import useArticles from "hooks/useArticles";
 import { useRouter } from "next/router";
+import Dashboard from "components/layout/Dashboard";
 
 export default function Dynamic(): ReactElement {
   const router = useRouter();
@@ -19,9 +20,7 @@ export default function Dynamic(): ReactElement {
   return (
     <div>
       {filteredArticles.map((article) => (
-        <div key={article.id}>
-          {article.title}
-        </div>
+        <Dashboard key={article.id} item={article} />
       ))}
     </div>
   );

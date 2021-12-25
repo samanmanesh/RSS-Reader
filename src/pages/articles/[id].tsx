@@ -18,15 +18,9 @@ export default function DynamicRoute(): ReactElement {
     );
   }, [articles]);
 
-  // console.debug("articles", articles.find(
-  //   (article) => article.id ===router.query.id
-  // ));
-
   return (
     <div>
-      
-      {/* <h1>{router.query.id}</h1> */}
-      {/* {item.title} */}
+    
       {article ? (
         <ShowFeedData article={article} />
       ) : (
