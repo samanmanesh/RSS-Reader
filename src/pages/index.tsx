@@ -56,6 +56,7 @@ export default function Home() {
     article: IArticle
   ) => {
     const hostname = getRSSFeedName(article.guid);
+    console.debug('>', hostname, article.feedName)
     return hostname;
   };
 

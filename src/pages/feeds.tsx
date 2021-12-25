@@ -18,6 +18,8 @@ export default function feeds({}: Props): ReactElement {
     return hostname;
   };
 
+  console.debug(articles);
+
   console.debug("filterFeeds", filterFeed);
 
   return (

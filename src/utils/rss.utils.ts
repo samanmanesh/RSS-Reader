@@ -48,8 +48,7 @@ const convertItemToArticle = (
 
     article[key] = value;
   }
-  //todo add somehow url to article to use otherwhere
-  // article.feedName = getRSSFeedName(url);
+  article.feedName = getRSSFeedName(article.guid);
   article.id = generateId(article.title, article.pubdate);
 
   return article;
@@ -82,17 +81,12 @@ export const getRSSFeed = async (url: string): Promise<IFeed> => {
       console.error("invalid url", url);
       return;
     }
-    const match = url.match(/^(?:https?:)?(?:\/\/)?([^\/\?]+)/i);
-    const hostname = match && match[1];
 
     const feed: IFeed = {
-      name: hostname,
+      name: getRSSFeedName(url),
       link: url,
     }
-
-    
     return feed;
-
   } 
 
 
@@ -140,6 +134,5 @@ export const getRSSFeedName = (
     /^(?:https?:)?(?:\/\/)?([^\/\?]+)/i
   );
   const hostname = match && match[1];
-  console.debug("hostname", hostname);
   return hostname;
 };
