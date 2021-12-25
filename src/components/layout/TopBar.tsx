@@ -1,5 +1,9 @@
-import React, { ReactElement } from "react";
-import { Fragment, useState } from "react";
+import React, {
+  ReactElement,
+  useMemo,
+  useState,
+} from "react";
+import { Fragment } from "react";
 import {
   Dialog,
   Menu,
@@ -19,6 +23,9 @@ import {
 import { SearchIcon } from "@heroicons/react/solid";
 import useSidebar from "hooks/useSidebar";
 import { classNames } from "utils/ui.utils";
+import { useRouter } from "next/router";
+import useArticles from "hooks/useArticles";
+import useSearch from "hooks/useSearch";
 
 const userNavigation = [
   { name: "Your Profile", href: "#" },
@@ -30,7 +37,27 @@ interface Props {}
 
 export default function TopBar({}: Props): ReactElement {
   const { setSidebarOpen } = useSidebar();
+  const { search, setSearch } = useSearch()
+  const router = useRouter();
+  const { articles } = useArticles();
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearch(e.target.value);
+  };
+
+  const onClickHandler = (e) => {
+    e.preventDefault();
+    setSearch(e.target.value);
+  };
+
+  const onKeyDownHandler = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      setSearch(e.target.value);
+    }
+  };
+  
   {
     /* sidebar button& search & notification &profile dropdown  wrapper */
   }
@@ -77,8 +104,12 @@ export default function TopBar({}: Props): ReactElement {
                 placeholder="Search"
                 type="search"
                 name="search"
+                onChange={handleSearch}
+                // onClick={onClickHandler}
+                onKeyDown={onKeyDownHandler}
               />
             </div>
+            <h1>{search}</h1>
           </form>
         </div>
 

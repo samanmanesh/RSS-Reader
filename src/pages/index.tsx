@@ -1,13 +1,12 @@
 import RssTest from "components/RssTest";
 import { getRSSFeedName } from "utils/rss.utils";
 import useArticles from "hooks/useArticles";
-import Link from "next/link";
-import FeedItem from "components/layout/FeedItem";
+import FeedList from "components/layout/FeedList";
 
 const bgColor = `bg-orange-300`;
 
 export default function Home() {
-  const { articles } = useArticles();
+  const { searchResults } = useArticles();
 
   const cssTricksRSS =
     "https://css-tricks.com/feed/";
@@ -18,10 +17,6 @@ export default function Home() {
 
 
   return (
-    <div className="h-full pt-4 space-y-6">
-      {articles.map((item) => {
-        return <FeedItem item={item} />;
-      })}
-    </div>
+    <FeedList articles={searchResults} /> 
   );
 }

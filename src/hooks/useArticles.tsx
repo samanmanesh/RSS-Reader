@@ -6,6 +6,7 @@ import {
   removeDuplicateArticles,
   sortArticles,
 } from "utils/articles.utils";
+import useSearch from "hooks/useSearch";
 
 const articleState = atom({
   key: "articleState",
@@ -17,8 +18,6 @@ const feedsState = atom({
   default: [],
 });
 
-
-
 const useArticles = (shouldFetch = false) => {
   const [articles, setArticles] =
     useRecoilState<IArticle[]>(articleState);
@@ -27,6 +26,7 @@ const useArticles = (shouldFetch = false) => {
 
   const [localFeeds, setLocalFeeds] =
     useLocalStorage<IFeed[]>("feeds");
+  const { search } = useSearch();
 
   useEffect(() => {
     if (!shouldFetch) return;
@@ -48,7 +48,7 @@ const useArticles = (shouldFetch = false) => {
     const sortedArticles =
       sortArticles(newArticles);
 
-    //? 3. Set the articles state 
+    //? 3. Set the articles state
     setArticles(sortedArticles);
   };
 
@@ -74,20 +74,35 @@ const useArticles = (shouldFetch = false) => {
     return articleResults;
   };
 
-  
-
   const addFeed = (feed: IFeed) => {
     //prevents and remove duplicate feed
     const newFeeds = feeds.filter(
       (prevFeed) => prevFeed.link !== feed.link
     );
     setFeeds([...newFeeds, feed]);
-    setLocalFeeds([...newFeeds, feed]);  
+    setLocalFeeds([...newFeeds, feed]);
   };
+
+  const searchResults = useMemo(() => {
+    return articles.filter(
+      (article) =>
+        article.title
+          .toLowerCase()
+          .includes(search.toLowerCase()) ||
+        article["dc:creator"]
+          .toLowerCase()
+          .includes(search.toLowerCase()) ||
+        article.pubdate
+          .toDateString()
+          .toLowerCase()
+          .includes(search.toLowerCase())
+    );
+  }, [articles, search]);
 
   // console.debug("articles#", articles);
   return {
     articles,
+    searchResults,
     feeds,
     addFeed,
     localFeeds,

@@ -4,27 +4,18 @@ import React, {
 } from "react";
 import useArticles from "hooks/useArticles";
 import { useRouter } from "next/router";
-import FeedItem from "components/layout/FeedItem";
+import FeedList from "components/layout/FeedList";
 
 export default function Dynamic(): ReactElement {
   const router = useRouter();
-  const { articles } = useArticles();
+  const { searchResults } = useArticles();
 
   const filteredArticles = useMemo(() => {
     const id = router.query.id;
-    return articles.filter(
+    return searchResults.filter(
       (article) => article.feedName === id
     );
-  }, [articles, router]);
+  }, [searchResults, router]);
 
-  return (
-    <div>
-      {filteredArticles.map((article) => (
-        <div className="pt-4 space-y-6">
-          <FeedItem key={article.id} item={article} />
-
-        </div>
-      ))}
-    </div>
-  );
+  return <FeedList articles={filteredArticles} />;
 }
