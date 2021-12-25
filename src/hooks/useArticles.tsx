@@ -17,10 +17,7 @@ const feedsState = atom({
   default: [],
 });
 
-// interface IFeed {
-//   name: string;
-//   link: string;
-// }
+
 
 const useArticles = (shouldFetch = false) => {
   const [articles, setArticles] =
@@ -77,47 +74,7 @@ const useArticles = (shouldFetch = false) => {
     return articleResults;
   };
 
-  // const fetchArticles = async () => {
-  //   if (feeds.length > 0) {
-  //     feeds.forEach(async (feed) => {
-  //       const url = feed.link;
-  //       const results = await getRSSFeedData(url);
-  //       addArticles(results);
-  //     });
-  //   }
-  // };
-
-  //         )
-  //     const feed = feeds[0];
-  //     const url = feed.link;
-  //     const results = await getRSSFeedData(url);
-  //     addArticles( results);
-
-  //   }
-  // }
-
-  // const addArticles = (
-  //   newArticles: IArticle[]
-  // ) => {
-  //   if (!newArticles) {
-  //     console.error("New articles are undefined");
-  //     return;
-  //   }
-  //   setArticles((prev) => {
-  //     const newArticlesNoDuplicates =
-  //       newArticles.filter(
-  //         (article) => !prev.some(
-  //             (prevArticle) =>
-  //               prevArticle.guid === article.guid
-  //           )
-  //       );
-  //     return [
-  //       ...prev,
-  //       ...newArticlesNoDuplicates,
-  //     ];
-  //   });
-
-  // };
+  
 
   const addFeed = (feed: IFeed) => {
     //prevents and remove duplicate feed
@@ -125,10 +82,7 @@ const useArticles = (shouldFetch = false) => {
       (prevFeed) => prevFeed.link !== feed.link
     );
     setFeeds([...newFeeds, feed]);
-    setLocalFeeds([...newFeeds, feed]);
-
-    // setFeeds((prev) => [...prev, feed]);
-    // setLocalFeeds([...feeds, feed]); //! why we add feed to feeds here as it already added feeds in global state?
+    setLocalFeeds([...newFeeds, feed]);  
   };
 
   // console.debug("articles#", articles);

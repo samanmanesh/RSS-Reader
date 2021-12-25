@@ -74,7 +74,10 @@ const convertItemToArticle = (
     article[key] = value;
   }
   console.debug(">>", item.innerHTML);
-  article.imageSrc = getImageInContent(article['content:encoded']);
+
+  article.imageSrc = getImageInContent(
+    article["content:encoded"]
+  );
 
   article.feedName = getRSSFeedName(article.guid);
   article.id = generateId(
@@ -83,18 +86,6 @@ const convertItemToArticle = (
   );
 
   return article;
-
-  // const children: Element[] = Array.from(
-  //   item.children
-  // );
-
-  // children.forEach((child: Element) => {
-  //   const key = child.tagName.toLowerCase();
-  //   const value = decodeString(
-  //     parseCDATA(child.innerHTML)
-  //   );
-  //   article[key] = value;
-  // });
 };
 
 export const validateRSSUrl = (
@@ -146,7 +137,7 @@ export const getRSSFeedData = async (
   const items =
     documentXML.querySelectorAll("item");
 
-  console.debug("items", items);
+  // console.debug("items", items);
   const articles = Array.from(items).map(
     convertItemToArticle
   );
