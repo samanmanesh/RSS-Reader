@@ -110,7 +110,7 @@ export const getRSSFeed = async (
   //! first get GUID from article then
   //!get the name from guid and then assign
   //! it to name in IFeed makes a unique name to search and filter data
-
+  
   const guid = await getGUID(url);
 
   const feed: IFeed = {

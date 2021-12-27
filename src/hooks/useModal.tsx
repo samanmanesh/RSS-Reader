@@ -8,9 +8,12 @@ type ReturnType = [boolean, ...Array<() => void>]
 export default function useModal() {
   const [showModal, setShowModal] =
     useState<boolean>(false);
+    const [showError, setShowError] =
+    useState(false);
 
   const openModal = () => {
     setShowModal(true);
+    setShowError(false);
   };
 
   const closeModal = () => {
@@ -21,5 +24,7 @@ export default function useModal() {
     showModal,
     openModal,
     closeModal,
+    showError,
+    setShowError
   ] as ReturnType;
 }

@@ -69,7 +69,7 @@ const navigation = [
 ];
 
 const Sidebar = () => {
-  const [showModal, openModal, closeModal] =
+  const [showModal, openModal, closeModal,showError,setShowError] =
     useModal();
   const { sidebarOpen, setSidebarOpen } =
     useSidebar();
@@ -77,6 +77,8 @@ const Sidebar = () => {
   const [selectNavItem, setSelectNavItem] =
     useState("");
 
+  // const [showError, setShowError] =
+  //   useState(false);
   // useEffect(() => {
   //   if (window) {
   //     document.documentElement.classList.add(
@@ -93,8 +95,7 @@ const Sidebar = () => {
   const NewYorkTimesRSS =
     "https://rss.nytimes.com/services/xml/rss/nyt/World.xml";
 
-  const [rssUrl, setRssUrl] =
-    useState("");
+  const [rssUrl, setRssUrl] = useState("");
 
   const inputHandler = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -114,12 +115,15 @@ const Sidebar = () => {
   }
   const handleGetFeed = async (e) => {
     e.preventDefault();
-    
-    const results = await getRSSFeed(rssUrl);
-    
 
-    if (results) addFeed(results);
+    const results = await getRSSFeed(rssUrl);
+
+    if (results)
+    { addFeed(results);
+      setShowError(false);
+    }
     setRssUrl("");
+    if (!results) setShowError(true);
   };
 
   const handleToggle = (name: string) => {
@@ -130,7 +134,6 @@ const Sidebar = () => {
       }
     });
   };
-
 
   return (
     <>
@@ -215,15 +218,12 @@ const Sidebar = () => {
                   ))}
                 </nav>
               </div>
-            
               <section className="flex-grow  ">
-              <span className=" rounded-md py-2 px-2  text-base font-medium">
-                
-                Feeds
-              </span>
-              <SidebarFeedItem />
-            </section>
-
+                <span className=" rounded-md py-2 px-2  text-base font-medium">
+                  Feeds
+                </span>
+                <SidebarFeedItem />
+              </section>
               <button
                 onClick={openModal}
                 className="btn btn-lg btn-light mx-auto mb-6"
@@ -261,7 +261,6 @@ const Sidebar = () => {
             </nav>
             <section className="flex-grow  ">
               <span className=" rounded-md py-2 px-2  text-base font-medium">
-                
                 Feeds
               </span>
               <SidebarFeedItem />
@@ -273,7 +272,6 @@ const Sidebar = () => {
             >
               Add New Item
             </button>
-            
           </div>
           <Modal
             title="hello"
@@ -282,18 +280,20 @@ const Sidebar = () => {
             show={showModal}
           >
             <form onSubmit={handleGetFeed}>
-              <div className="flex flex-col space-y-5 justify-items-center">
-                <label> Type Your RSS URL </label>
-
+              <div className="flex flex-col  space-y-6 justify-items-center">
+                <label className="text-lg font-medium text-center"> Type Your RSS URL </label>
+                {showError && <p className="text-center"> URL Is Invalid ! <br/> Please Enter a Valid URL</p>}
                 <input
                   type="text"
                   onChange={inputHandler}
                   value={rssUrl}
-                  className=" mb-2 border-4 border-gray-400"
+                  className=" mb-2 bg-gray-200 border border-gray-400 rounded-sm focus:outline-none focus:ring-1 
+                  focus:ring-offset-2 focus:ring-black"
                 />
                 <input
                   type="submit"
-                  className="p-3 m-6 border-solid border-2 border-black"
+                  className=" btn-lg btn-light cursor-pointer focus:outline-none focus:ring-1 
+                  focus:ring-offset-2 focus:ring-black "
                 />
               </div>
             </form>
