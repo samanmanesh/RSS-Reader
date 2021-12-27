@@ -8,7 +8,7 @@ interface Props {
 export default function ArticleView({
   article,
 }: Props): ReactElement {
-  console.debug("article view");
+  // console.debug("article view");
   return (
     <div
       className="p-2 rounded-sm mb-4"

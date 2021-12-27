@@ -73,15 +73,13 @@ const convertItemToArticle = (
 
     article[key] = value;
   }
-  // console.debug(">>", item.innerHTML);
+  
 
   article.imageSrc = getImageInContent(
     article["content:encoded"]
   );
 
-  //? feed name here is differnet with feedname in feed
   article.feedName = getRSSFeedName(article.guid);
-  console.debug(">>", article.guid);
   article.id = generateId(
     article.title,
     article.pubdate

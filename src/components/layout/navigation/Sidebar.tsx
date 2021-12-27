@@ -273,7 +273,7 @@ const Sidebar = () => {
             >
               Add New Item
             </button>
-            {/* {console.log(showModal)} */}
+            
           </div>
           <Modal
             title="hello"

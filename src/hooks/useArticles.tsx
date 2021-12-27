@@ -99,7 +99,8 @@ const useArticles = (shouldFetch = false) => {
     );
   }, [articles, search]);
 
-  console.debug("articles#", articles);
+  // console.debug("articles#", articles);
+  
   return {
     articles,
     searchResults,
