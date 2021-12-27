@@ -8,23 +8,21 @@ interface Props {
 export default function ArticleView({
   article,
 }: Props): ReactElement {
-  console.debug('article view');
+  console.debug("article view");
   return (
     <div
       className="p-2 rounded-sm mb-4"
       key={article.guid}
     >
       <div className="flex items-center justify-between  p-3">
-        <h1 className="text-3xl font-bold mb-2 ">
+        <h1 className="text-3xl font-bold mb-2 text-left  max-w-xl">
           {article.title}
         </h1>
-        <div
-          className="tag"
-        >
+        <div className="tag bg-indigo-300 flex-shrink-0 inline-flex">
           {getRSSFeedName(article.guid)}
         </div>
       </div>
-      <div className="flex items-center justify-between mb-8 p-3">
+      <div className="flex items-center justify-between mb-2 p-3">
         <h2 className="text-md  mb-2 ">
           {/* Author Name */}
           <span
@@ -39,25 +37,35 @@ export default function ArticleView({
           {article.pubdate.toDateString()}
         </h4>
       </div>
-      <hr className="mb-8"/>
-      <div className="prose prose-headings:text-purple-500 mx-auto">
-        <span
-          dangerouslySetInnerHTML={{
-            __html: article["content:encoded"],
-          }}
-        />
+            
+      <div className="mb-4 ">
+        <a
+          href={article.link}
+          target="_blank"
+          className=" px-2.5 py-1 bg-cyan-300 rounded-tl-lg rounded-br-lg  "
+        >
+          Link to this article &rarr;
+        </a>
       </div>
-      <div className="prose prose-headings:text-purple-500 mx-auto">
-        
-        {/** in cases that doesn't have content but has description '*/}
-        {article["content:encoded"] ? " " : 
+
+      <hr className="mb-8" />
+
+      {/** in cases that doesn't have content but has description '*/}
+      {article["content:encoded"] ? (
+        <div className="prose prose-headings:text-purple-500 mx-auto">
+          <span
+            dangerouslySetInnerHTML={{
+              __html: article["content:encoded"],
+            }}
+          />
+        </div>
+      ) : (
         <span
           dangerouslySetInnerHTML={{
             __html: article["description"],
           }}
         />
-      }
-      </div>
+      )}
     </div>
   );
 }

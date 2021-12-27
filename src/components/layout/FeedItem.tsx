@@ -32,7 +32,7 @@ export default function FeedItem({
         <div className="px-6 py-4">
 
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold mb-2 text-left  max-w-xl">
+          <h1 className="text-2xl font-bold mb-2 text-left  max-w-md">
             {item.title}
           </h1>
           <div
