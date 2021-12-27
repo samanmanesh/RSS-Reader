@@ -5,6 +5,8 @@ import React, { ReactElement } from "react";
 
 export default function SidebarFeedItem(): ReactElement {
   const { feeds } = useArticles();
+  
+  console.debug("feeds", feeds);
 
   return (
     <ul className="p-2">
@@ -13,11 +15,13 @@ export default function SidebarFeedItem(): ReactElement {
           href={`/feeds/${feed.name}`}
           key={feed.name}
         >
+          
           <li
             key={feed.link}
             className=" mb-2 p-1 pl-2 cursor-pointer"
           >
             {feed.name}
+            {console.debug("feed name  is", feed.name)}
           </li>
         </Link>
       ))}

@@ -79,7 +79,9 @@ const convertItemToArticle = (
     article["content:encoded"]
   );
 
+  //? feed name here is differnet with feedname in feed
   article.feedName = getRSSFeedName(article.guid);
+  console.debug(">>", article.guid);
   article.id = generateId(
     article.title,
     article.pubdate
@@ -107,11 +109,23 @@ export const getRSSFeed = async (
     return;
   }
 
+  //! first get GUID from article then
+  //!get the name from guid and then assign
+  //! it to name in IFeed makes a unique name to search and filter data
+
+  const guid = await getGUID(url);
+
   const feed: IFeed = {
-    name: getRSSFeedName(url),
+    name: getRSSFeedName(guid),
     link: url,
   };
   return feed;
+};
+
+const getGUID = async (url: string) => {
+  const feedArticles = await getRSSFeedData(url);
+
+  return feedArticles[0].guid;
 };
 
 export const getRSSFeedData = async (
@@ -137,11 +151,10 @@ export const getRSSFeedData = async (
   const items =
     documentXML.querySelectorAll("item");
 
-  // console.debug("items", items);
   const articles = Array.from(items).map(
     convertItemToArticle
   );
-  // console.debug("articles in rss.utils", articles);
+
   return articles;
 };
 
@@ -151,8 +164,9 @@ export const getRSSFeedName = (url: string) => {
     return;
   }
   const match = url.match(
-    /^(?:https?:)?(?:\/\/)?([^\/\?]+)/i
+    /^(?:https?:)?(?:\/\/)?([^\/\?]+)/
   );
+
   const hostname = match && match[1];
   return hostname;
 };

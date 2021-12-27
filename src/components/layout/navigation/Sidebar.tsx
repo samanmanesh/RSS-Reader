@@ -114,9 +114,9 @@ const Sidebar = () => {
   }
   const handleGetFeed = async (e) => {
     e.preventDefault();
-    // console.debug("handleGetFeed >>");
+    
     const results = await getRSSFeed(rssUrl);
-    // console.debug("results is", results);
+    
 
     if (results) addFeed(results);
     setRssUrl("");
@@ -130,7 +130,7 @@ const Sidebar = () => {
       }
     });
   };
-  // console.log("selectNavItem", selectNavItem);
+
 
   return (
     <>
