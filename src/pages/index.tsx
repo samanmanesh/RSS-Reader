@@ -14,6 +14,7 @@ export default function Home() {
     "https://www.joshwcomeau.com/rss.xml";
   const mediumRSS =
     "https://medium.com/feed/@joshwcomeau";
+  const NewYorkTimesRSS = "https://rss.nytimes.com/services/xml/rss/nyt/World.xml"; 
 
 
   return (

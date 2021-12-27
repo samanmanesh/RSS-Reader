@@ -8,7 +8,7 @@ interface Props {
 export default function ArticleView({
   article,
 }: Props): ReactElement {
-  console.debug('@@', article);
+  console.debug('article view');
   return (
     <div
       className="p-2 rounded-sm mb-4"
@@ -46,6 +46,17 @@ export default function ArticleView({
             __html: article["content:encoded"],
           }}
         />
+      </div>
+      <div className="prose prose-headings:text-purple-500 mx-auto">
+        
+        {/** in cases that doesn't have content but has description '*/}
+        {article["content:encoded"] ? " " : 
+        <span
+          dangerouslySetInnerHTML={{
+            __html: article["description"],
+          }}
+        />
+      }
       </div>
     </div>
   );

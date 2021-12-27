@@ -73,7 +73,7 @@ const convertItemToArticle = (
 
     article[key] = value;
   }
-  console.debug(">>", item.innerHTML);
+  // console.debug(">>", item.innerHTML);
 
   article.imageSrc = getImageInContent(
     article["content:encoded"]
