@@ -26,7 +26,7 @@ export default function SidebarItem({
   const router = useRouter();
 
   const isActive = router.pathname === item.href;
-
+  
   return (
     <div onClick={() => handleToggle(item.name)}>
       <Link key={item.name} href={item.href}>

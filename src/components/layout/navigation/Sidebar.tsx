@@ -206,7 +206,7 @@ const Sidebar = () => {
                 <span className=" rounded-md py-2 px-2  text-base font-medium">
                   Feeds
                 </span>
-                <SidebarFeedItem />
+                <SidebarFeedItem  />
               </section>
               <button
                 onClick={openModal}
