@@ -48,24 +48,6 @@ const navigation = [
     href: "#",
     icon: FolderIcon,
   },
-  // {
-  //   name: "Calendar",
-  //   href: "#",
-  //   icon: CalendarIcon,
-  //   current: false,
-  // },
-  // {
-  //   name: "Documents",
-  //   href: "#",
-  //   icon: InboxIcon,
-  //   current: false,
-  // },
-  // {
-  //   name: "Reports",
-  //   href: "#",
-  //   icon: ChartBarIcon,
-  //   current: false,
-  // },
 ];
 
 const Sidebar = () => {
@@ -74,7 +56,8 @@ const Sidebar = () => {
     openModal,
     closeModal,
     showError,
-    setShowError,
+    showErrorState,
+    closeErrorState,
   ] = useModal();
   const { sidebarOpen, setSidebarOpen } =
     useSidebar();
@@ -83,6 +66,8 @@ const Sidebar = () => {
     useState("");
 
   // const [showError, setShowError] =
+ 
+  //!for dark mode 
   //   useState(false);
   // useEffect(() => {
   //   if (window) {
@@ -108,13 +93,6 @@ const Sidebar = () => {
     setRssUrl(e.target.value);
   };
 
-  // const handleGetFeedData = async (e) => {
-  //   e.preventDefault();
-  //   console.debug("handleGetFeedData >>");
-  //   const results = await getRSSFeedData(rssUrl);
-  //   // addArticles(results);
-  //   setRssUrl("");
-  // };
   {
     /**just take url and name IFeed and store it on Feeds on local storage */
   }
@@ -125,11 +103,11 @@ const Sidebar = () => {
 
     if (results) {
       addFeed(results);
-      setShowError(false);
+      closeErrorState();
     }
 
     setRssUrl("");
-    if (!results) setShowError(true);
+    if (!results) showErrorState();
   };
 
   const handleToggle = (name: string) => {
@@ -280,7 +258,7 @@ const Sidebar = () => {
             </button>
           </div>
           <Modal
-            title="hello"
+            title="ha"
             onClose={closeModal}
             onSubmit={closeModal}
             show={showModal}
@@ -292,8 +270,9 @@ const Sidebar = () => {
                   Type Your RSS URL{" "}
                 </label>
                 {showError && (
-                  <p className="text-center ">
-                    URL Is Invalid ! <br /> Please
+                  <p className={`text-center text-red-600 peer `}>
+                    {" "}
+                    Invalid URL ! <br /> Please
                     Enter a Valid URL
                   </p>
                 )}
@@ -301,13 +280,13 @@ const Sidebar = () => {
                   type="text"
                   onChange={inputHandler}
                   value={rssUrl}
-                  className=" mb-2 bg-gray-200 border border-gray-400 rounded-sm focus:outline-none focus:ring-1 
-                  focus:ring-offset-2 focus:ring-black"
+                  className={` max-w-4xl mb-2 bg-gray-200 border-2  rounded-sm focus:outline-none focus:ring-1 
+                  focus:ring-offset-2 focus:indigo-500 ${showError &&"text-red-500"}`} 
                 />
                 <input
                   type="submit"
                   className=" btn-lg btn-light cursor-pointer focus:outline-none focus:ring-1 
-                  focus:ring-offset-2 focus:ring-black "
+                  focus:ring-offset-2 focus:ring-indigo-500 "
                 />
               </div>
             </form>
