@@ -5,7 +5,7 @@ import { TrashIcon } from "@heroicons/react/solid";
 import Modal from "../Modal";
 
 export default function SidebarFeedItem(): ReactElement {
-  const { feeds, removeFeed } = useArticles();
+  const { feeds, removeFeed, getFeedColor } = useArticles();
   const [selectedFeed, setSelectedFeed] = useState("");
 
   const removeFeedHandler = () => {
@@ -35,9 +35,12 @@ export default function SidebarFeedItem(): ReactElement {
             <Link href={`/feeds/${feed.name}`} key={feed.name}>
               <li
                 key={feed.link}
-                className=" mb-2 p-1 pl-3 cursor-pointer flex justify-between  "
+                className="mb-2 p-1 pl-3 cursor-pointer flex items-center space-x-2 overflow-hidden"
               >
-                {feed.name}
+                <span className="w-2 h-2 rounded-full block flex-shrink-0" style={{
+                  backgroundColor: getFeedColor(feed)
+                }} />
+                <span className="truncate">{feed.name}</span>
               </li>
             </Link>
             <button className="pl-4 " onClick={() => openModal(feed.name)}>
@@ -56,17 +59,18 @@ export default function SidebarFeedItem(): ReactElement {
           <p className="text-lg font-semibold mb-5">
             Are you sure you want to delete this item?
           </p>
-          <div className="flex items-center justify-around">
+          <div className="flex items-center space-x-4">
             <button
               onClick={removeFeedHandler}
-              className="btn btn-lg btn-light  "
+              className="btn btn-lg btn-light w-full text-center grid place-items-center"
+
             >
               Yes
             </button>
             <button
               onClick={closeModal}
               onKeyDown={onKeyDownHandler}
-              className="btn btn-lg btn-light "
+              className="btn btn-lg btn-light w-full text-center grid place-items-center"
             >
               No
             </button>

@@ -1,5 +1,8 @@
 import React, { ReactElement } from "react";
 import { getRSSFeedName } from "utils/rss.utils";
+import { ExternalLinkIcon } from "@heroicons/react/solid";
+import FeedTag from './layout/FeedTag';
+import useArticles from "hooks/useArticles";
 
 interface Props {
   article: IArticle;
@@ -8,7 +11,7 @@ interface Props {
 export default function ArticleView({
   article,
 }: Props): ReactElement {
-  // console.debug("article view");
+  const { getArticleFeed } = useArticles();
   return (
     <div
       className="p-2 rounded-sm mb-4"
@@ -18,9 +21,7 @@ export default function ArticleView({
         <h1 className="text-3xl font-bold mb-2 text-left  max-w-xl">
           {article.title}
         </h1>
-        <div className="tag bg-indigo-300 flex-shrink-0 inline-flex">
-          {getRSSFeedName(article.guid)}
-        </div>
+        <FeedTag feed={getArticleFeed(article)} />
       </div>
       <div className="flex items-center justify-between mb-2 p-3">
         <h2 className="text-md  mb-2 ">
@@ -37,14 +38,15 @@ export default function ArticleView({
           {article.pubdate.toDateString()}
         </h4>
       </div>
-            
+
       <div className="mb-4 ">
         <a
           href={article.link}
           target="_blank"
-          className=" px-2.5 py-1 bg-cyan-300 rounded-tl-lg rounded-br-lg  "
+          className="btn btn-md btn-light"
         >
-          Link to this article &rarr;
+          Link to this article{" "}
+          <ExternalLinkIcon className="w-4 h-4 ml-1" />
         </a>
       </div>
 

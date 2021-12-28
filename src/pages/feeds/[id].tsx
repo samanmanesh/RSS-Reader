@@ -4,7 +4,7 @@ import React, {
 } from "react";
 import useArticles from "hooks/useArticles";
 import { useRouter } from "next/router";
-import FeedList from "components/layout/FeedList";
+import ArticleList from "components/layout/ArticleList";
 
 export default function Dynamic(): ReactElement {
  
@@ -19,5 +19,5 @@ export default function Dynamic(): ReactElement {
     );
   }, [searchResults, router]);
 
-  return <FeedList articles={filteredArticles} />;
+  return <ArticleList articles={filteredArticles} />;
 }

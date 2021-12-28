@@ -108,15 +108,44 @@ const useArticles = (shouldFetch = false) => {
     );
   }, [articles, search]);
 
+  const getArticleFeed = (article: IArticle): IFeed => {
+    console.debug(article, feeds)
+    return feeds.find(
+      (feed) => feed.name === article.feedName
+    );
+  }
+
+
+  const getFeedColor = (feed: IFeed) => {
+    if (!feed) return '#fff';
+    
+    const colors = [
+      "#cad3ff",
+      "#8ee1ff",
+      "#84f4be",
+      "#ffd8fb",
+      "#ffa726",
+      "#f44336",
+      "#9c27b0",
+    ];
+
+    const index = feeds.findIndex(
+      (prevFeed) => prevFeed.link === feed.link
+    );
+    return colors[index % colors.length];
+  }
+
   // console.debug("articles#", articles);
 
   return {
     articles,
     searchResults,
+    getFeedColor,
     feeds,
     addFeed,
     localFeeds,
     removeFeed,
+    getArticleFeed
   };
 };
 

@@ -1,7 +1,7 @@
 import RssTest from "components/RssTest";
 import { getRSSFeedName } from "utils/rss.utils";
 import useArticles from "hooks/useArticles";
-import FeedList from "components/layout/FeedList";
+import ArticleList from "components/layout/ArticleList";
 
 const bgColor = `bg-orange-300`;
 
@@ -18,6 +18,6 @@ export default function Home() {
 
 
   return (
-    <FeedList articles={searchResults} /> 
+    <ArticleList articles={searchResults} /> 
   );
 }

@@ -267,13 +267,13 @@ const Sidebar = () => {
               <div className="flex flex-col  space-y-6 justify-items-center">
                 <label className="text-lg font-medium text-center">
                   {" "}
-                  Type Your RSS URL{" "}
+                  Enter a RSS URL{" "}
                 </label>
                 {showError && (
                   <p className={`text-center text-red-600 peer `}>
-                    {" "}
-                    Invalid URL ! <br /> Please
-                    Enter a Valid URL
+                    {" "} 
+                    Invalid URL! <br /> Please
+                    enter a valid URL
                   </p>
                 )}
                 <input
@@ -285,8 +285,7 @@ const Sidebar = () => {
                 />
                 <input
                   type="submit"
-                  className=" btn-lg btn-light cursor-pointer focus:outline-none focus:ring-1 
-                  focus:ring-offset-2 focus:ring-indigo-500 "
+                  className="btn btn-light btn-md w-full"
                 />
               </div>
             </form>

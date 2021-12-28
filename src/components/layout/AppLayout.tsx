@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import Dashboard from "./FeedItem";
+import Dashboard from "./ArticleItem";
 import TopBar from "components/layout/TopBar";
 import Sidebar from "components/layout/navigation/Sidebar";
 
