@@ -1,8 +1,7 @@
 import useArticles from "hooks/useArticles";
 import Link from "next/link";
 import React, { ReactElement } from "react";
-import { getRSSFeedName } from "utils/rss.utils";
-import FeedTag from './FeedTag';
+import FeedTag from "./FeedTag";
 
 interface Props {
   item: IArticle;
@@ -24,7 +23,7 @@ export default function ArticleItem({
         group
         "
         key={item.guid}
-        >
+      >
         {item.imageSrc ? (
           <div className="h-64 bg-black">
             <img
@@ -34,37 +33,30 @@ export default function ArticleItem({
           </div>
         ) : null}
         <div className="px-6 py-4">
-
-        <div className="flex items-start justify-between gap-2">
-          <h1 className="text-2xl font-bold mb-2 text-left max-w-md">
-            {item.title}
-          </h1>
-          <FeedTag feed={getArticleFeed(item)} />
-          {/* <div
-            className={`flex-shrink-0 inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium`}
-            style={{
-              backgroundColor: getFeedColor(feed)
-            }}
-          >
-            {getRSSFeedName(item.guid)}
-          </div> */}
-        </div>
-        <div className="flex items-center justify-between">
-          <h2 className="text-md  mb-2 ">
-            {/* Author Name */}
-            <span
-            className="text-gray-600 font-medium"
-              dangerouslySetInnerHTML={{
-                __html: item["dc:creator"],
-              }}
+          <div className="flex items-start justify-between gap-2">
+            <h1 className="text-2xl font-bold mb-2 text-left max-w-md">
+              {item.title}
+            </h1>
+            <FeedTag
+              feed={getArticleFeed(item)}
             />
-          </h2>
+          </div>
+          <div className="flex items-center justify-between">
+            <h2 className="text-md  mb-2 ">
+              {/* Author Name */}
+              <span
+                className="text-gray-600 font-medium"
+                dangerouslySetInnerHTML={{
+                  __html: item["dc:creator"],
+                }}
+              />
+            </h2>
 
-          <h4 className="text-sm font-medium text-gray-600 mb-2 text-right">
-            {/* Date */}
-            {item.pubdate.toDateString()}
-          </h4>
-        </div>
+            <h4 className="text-sm font-medium text-gray-600 mb-2 text-right">
+              {/* Date */}
+              {item.pubdate.toDateString()}
+            </h4>
+          </div>
         </div>
       </button>
     </Link>

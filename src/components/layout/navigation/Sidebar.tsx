@@ -38,16 +38,16 @@ const navigation = [
     href: "/",
     icon: HomeIcon,
   },
-  {
-    name: "User",
-    href: "/about",
-    icon: UsersIcon,
-  },
-  {
-    name: "Folders",
-    href: "#",
-    icon: FolderIcon,
-  },
+  // {
+  //   name: "User",
+  //   href: "/about",
+  //   icon: UsersIcon,
+  // },
+  // {
+  //   name: "Folders",
+  //   href: "#",
+  //   icon: FolderIcon,
+  // },
 ];
 
 const Sidebar = () => {
@@ -263,6 +263,7 @@ const Sidebar = () => {
             onSubmit={closeModal}
             show={showModal}
           >
+            <>
             <form onSubmit={handleGetFeed}>
               <div className="flex flex-col  space-y-6 justify-items-center">
                 <label className="text-lg font-medium text-center">
@@ -271,7 +272,7 @@ const Sidebar = () => {
                 </label>
                 {showError && (
                   <p
-                    className={`text-center text-red-600 peer `}
+                    className={`text-center text-red-600  `}
                   >
                     {" "}
                     Invalid URL! <br /> Please
@@ -289,10 +290,13 @@ const Sidebar = () => {
                 />
                 <input
                   type="submit"
-                  className="btn btn-light btn-md w-full"
+                  className="btn btn-light btn-md w-full "
                 />
+                
               </div>
             </form>
+               <button onClick={closeModal} className="btn btn-light btn-md w-full mt-4 grid">Cancel</button>
+               </>
           </Modal>
         </div>
       </div>

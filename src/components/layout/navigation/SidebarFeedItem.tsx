@@ -31,7 +31,7 @@ export default function SidebarFeedItem(): ReactElement {
     <>
       <ul className="p-2">
         {feeds.map((feed) => (
-          <section className="flex justify-between  group">
+          <section className="flex justify-between  group ">
             <Link href={`/feeds/${feed.name}`} key={feed.name}>
               <li
                 key={feed.link}

@@ -2,10 +2,7 @@ import { atom, useRecoilState } from "recoil";
 import useLocalStorage from "hooks/useLocalStorage";
 import { useEffect, useMemo } from "react";
 import { getRSSFeedData } from "utils/rss.utils";
-import {
-  removeDuplicateArticles,
-  sortArticles,
-} from "utils/articles.utils";
+import { sortArticles } from "utils/articles.utils";
 import useSearch from "hooks/useSearch";
 
 const articleState = atom({
@@ -83,8 +80,7 @@ const useArticles = (shouldFetch = false) => {
     setLocalFeeds([...newFeeds, feed]);
   };
 
-  const removeFeed = (feedName:string) => {
-
+  const removeFeed = (feedName: string) => {
     const newFeeds = feeds.filter(
       (prevFeed) => prevFeed.name !== feedName
     );
@@ -108,17 +104,18 @@ const useArticles = (shouldFetch = false) => {
     );
   }, [articles, search]);
 
-  const getArticleFeed = (article: IArticle): IFeed => {
+  const getArticleFeed = (
+    article: IArticle
+  ): IFeed => {
     // console.debug(article, feeds)
     return feeds.find(
       (feed) => feed.name === article.feedName
     );
-  }
-
+  };
 
   const getFeedColor = (feed: IFeed) => {
-    if (!feed) return '#fff';
-    
+    if (!feed) return "#fff";
+
     const colors = [
       "#cad3ff",
       "#8ee1ff",
@@ -133,9 +130,7 @@ const useArticles = (shouldFetch = false) => {
       (prevFeed) => prevFeed.link === feed.link
     );
     return colors[index % colors.length];
-  }
-
-  // console.debug("articles#", articles);
+  };
 
   return {
     articles,
@@ -145,7 +140,7 @@ const useArticles = (shouldFetch = false) => {
     addFeed,
     localFeeds,
     removeFeed,
-    getArticleFeed
+    getArticleFeed,
   };
 };
 

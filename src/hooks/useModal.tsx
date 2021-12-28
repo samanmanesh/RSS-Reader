@@ -9,12 +9,16 @@ export default function useModal() {
     useState<boolean>(false);
 
   const openModal = () => {
+    closeErrorState();
     setShowModal(true);
-    setShowError(false);
+    // setShowError(false);
   };
 
   const closeModal = () => {
+    closeErrorState();
     setShowModal(false);
+    
+
   };
 
   const showErrorState = () => {
