@@ -107,13 +107,13 @@ export default function TopBar({}: Props): ReactElement {
                 onKeyDown={onKeyDownHandler}
               />
             </div>
-            <h1>{search}</h1>
+            
           </form>
         </div>
 
         {/*Notification */}
         <div className="ml-4 flex items-center md:ml-6">
-          <button
+          {/* <button
             type="button"
             className="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
@@ -124,10 +124,10 @@ export default function TopBar({}: Props): ReactElement {
               className="h-6 w-6"
               aria-hidden="true"
             />
-          </button>
+          </button> */}
 
           {/* Profile dropdown */}
-          <Menu
+          {/* <Menu
             as="div"
             className="ml-3 relative"
           >
@@ -172,7 +172,7 @@ export default function TopBar({}: Props): ReactElement {
                 ))}
               </Menu.Items>
             </Transition>
-          </Menu>
+          </Menu> */}
         </div>
       </div>
     </div>
