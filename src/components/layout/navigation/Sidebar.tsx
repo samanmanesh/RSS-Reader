@@ -127,7 +127,7 @@ const Sidebar = () => {
       addFeed(results);
       setShowError(false);
     }
-    
+
     setRssUrl("");
     if (!results) setShowError(true);
   };
@@ -292,8 +292,7 @@ const Sidebar = () => {
                   Type Your RSS URL{" "}
                 </label>
                 {showError && (
-                  <p className="text-center">
-                    {" "}
+                  <p className="text-center ">
                     URL Is Invalid ! <br /> Please
                     Enter a Valid URL
                   </p>

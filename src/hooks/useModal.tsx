@@ -1,14 +1,11 @@
-import React, {
-  
-  useState,
-} from "react";
+import React, { useState } from "react";
 
-type ReturnType = [boolean, ...Array<() => void>]
+type ReturnType = [boolean, ...Array<() => void>];
 
 export default function useModal() {
   const [showModal, setShowModal] =
     useState<boolean>(false);
-    const [showError, setShowError] =
+  const [showError, setShowError] =
     useState<boolean>(false);
 
   const openModal = () => {
@@ -25,6 +22,6 @@ export default function useModal() {
     openModal,
     closeModal,
     showError,
-    setShowError
+    setShowError,
   ] as ReturnType;
 }
