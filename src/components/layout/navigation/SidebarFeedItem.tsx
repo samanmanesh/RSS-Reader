@@ -59,14 +59,14 @@ export default function SidebarFeedItem(): ReactElement {
           <div className="flex items-center justify-around">
             <button
               onClick={removeFeedHandler}
-              className="bg-indigo-400  hover:bg-gray-900 hover:text-white focus:bg-gray-900 focus:text-white transition px-8 py-2 rounded-sm border-2 focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-white"
+              className="btn btn-lg btn-light  "
             >
               Yes
             </button>
             <button
               onClick={closeModal}
               onKeyDown={onKeyDownHandler}
-              className="bg-indigo-400  hover:bg-gray-900 hover:text-white focus:bg-gray-900 focus:text-white  transition px-8 py-2 rounded-sm border-2 focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-white "
+              className="btn btn-lg btn-light "
             >
               No
             </button>

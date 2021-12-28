@@ -270,9 +270,9 @@ const Sidebar = () => {
                   Type Your RSS URL{" "}
                 </label>
                 {showError && (
-                  <p className="text-center">
+                  <p className={`text-center text-red-600 peer `}>
                     {" "}
-                    URL Is Invalid ! <br /> Please
+                    Invalid URL ! <br /> Please
                     Enter a Valid URL
                   </p>
                 )}
@@ -280,13 +280,13 @@ const Sidebar = () => {
                   type="text"
                   onChange={inputHandler}
                   value={rssUrl}
-                  className=" mb-2 bg-gray-200 border border-gray-400 rounded-sm focus:outline-none focus:ring-1 
-                  focus:ring-offset-2 focus:ring-black"
+                  className={` max-w-4xl mb-2 bg-gray-200 border-2  rounded-sm focus:outline-none focus:ring-1 
+                  focus:ring-offset-2 focus:indigo-500 ${showError &&"text-red-500"}`} 
                 />
                 <input
                   type="submit"
                   className=" btn-lg btn-light cursor-pointer focus:outline-none focus:ring-1 
-                  focus:ring-offset-2 focus:ring-black "
+                  focus:ring-offset-2 focus:ring-indigo-500 "
                 />
               </div>
             </form>
