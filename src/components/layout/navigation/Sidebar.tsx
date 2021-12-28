@@ -69,8 +69,13 @@ const navigation = [
 ];
 
 const Sidebar = () => {
-  const [showModal, openModal, closeModal,showError,setShowError] =
-    useModal();
+  const [
+    showModal,
+    openModal,
+    closeModal,
+    showError,
+    setShowError,
+  ] = useModal();
   const { sidebarOpen, setSidebarOpen } =
     useSidebar();
   const { articles, addFeed } = useArticles(true);
@@ -118,10 +123,11 @@ const Sidebar = () => {
 
     const results = await getRSSFeed(rssUrl);
 
-    if (results)
-    { addFeed(results);
+    if (results) {
+      addFeed(results);
       setShowError(false);
     }
+    
     setRssUrl("");
     if (!results) setShowError(true);
   };
@@ -281,8 +287,17 @@ const Sidebar = () => {
           >
             <form onSubmit={handleGetFeed}>
               <div className="flex flex-col  space-y-6 justify-items-center">
-                <label className="text-lg font-medium text-center"> Type Your RSS URL </label>
-                {showError && <p className="text-center"> URL Is Invalid ! <br/> Please Enter a Valid URL</p>}
+                <label className="text-lg font-medium text-center">
+                  {" "}
+                  Type Your RSS URL{" "}
+                </label>
+                {showError && (
+                  <p className="text-center">
+                    {" "}
+                    URL Is Invalid ! <br /> Please
+                    Enter a Valid URL
+                  </p>
+                )}
                 <input
                   type="text"
                   onChange={inputHandler}
