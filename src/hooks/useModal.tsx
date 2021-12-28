@@ -20,11 +20,20 @@ export default function useModal() {
     setShowModal(false);
   };
 
+  const showErrorState = () => {
+    setShowError(true);
+  };
+
+  const closeErrorState = () => {
+    setShowError(false);
+  };
+
   return [
     showModal,
     openModal,
     closeModal,
     showError,
-    setShowError
+    showErrorState,
+    closeErrorState
   ] as ReturnType;
 }
