@@ -66,8 +66,8 @@ const Sidebar = () => {
     useState("");
 
   // const [showError, setShowError] =
- 
-  //!for dark mode 
+
+  //!for dark mode
   //   useState(false);
   // useEffect(() => {
   //   if (window) {
@@ -186,8 +186,8 @@ const Sidebar = () => {
               <div className="flex-shrink-0  px-4 flex items-center">
                 <img
                   className="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg"
-                  alt="Workflow"
+                  src="/logo.svg"
+                  alt="RSS Reader"
                 />
               </div>
               {/* Navigation Items */}
@@ -229,8 +229,8 @@ const Sidebar = () => {
           <div className="flex-shrink-0 px-4 flex items-center ">
             <img
               className="h-8 w-auto"
-              src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg"
-              alt="Workflow"
+              src="/logo.svg"
+              alt="RSS Reader"
             />
           </div>
           <div className="flex-grow mt-5 flex flex-col ">
@@ -270,8 +270,10 @@ const Sidebar = () => {
                   Enter a RSS URL{" "}
                 </label>
                 {showError && (
-                  <p className={`text-center text-red-600 peer `}>
-                    {" "} 
+                  <p
+                    className={`text-center text-red-600 peer `}
+                  >
+                    {" "}
                     Invalid URL! <br /> Please
                     enter a valid URL
                   </p>
@@ -281,7 +283,9 @@ const Sidebar = () => {
                   onChange={inputHandler}
                   value={rssUrl}
                   className={` max-w-4xl mb-2 bg-gray-200 border-2  rounded-sm focus:outline-none focus:ring-1 
-                  focus:ring-offset-2 focus:indigo-500 ${showError &&"text-red-500"}`} 
+                  focus:ring-offset-2 focus:indigo-500 ${
+                    showError && "text-red-500"
+                  }`}
                 />
                 <input
                   type="submit"
