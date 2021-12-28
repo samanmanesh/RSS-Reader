@@ -83,6 +83,15 @@ const useArticles = (shouldFetch = false) => {
     setLocalFeeds([...newFeeds, feed]);
   };
 
+  const removeFeed = (feedName:string) => {
+
+    const newFeeds = feeds.filter(
+      (prevFeed) => prevFeed.name !== feedName
+    );
+    setFeeds(newFeeds);
+    setLocalFeeds(newFeeds);
+  };
+
   const searchResults = useMemo(() => {
     return articles.filter(
       (article) =>
@@ -100,13 +109,14 @@ const useArticles = (shouldFetch = false) => {
   }, [articles, search]);
 
   // console.debug("articles#", articles);
-  
+
   return {
     articles,
     searchResults,
     feeds,
     addFeed,
     localFeeds,
+    removeFeed,
   };
 };
 

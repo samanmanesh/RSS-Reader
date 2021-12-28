@@ -7,11 +7,10 @@ import {
 } from "@heroicons/react/solid";
 
 export default function SidebarFeedItem(): ReactElement {
-  const { feeds } = useArticles();
+  const { feeds, removeFeed } = useArticles();
   
   const removeFeedHandler = (FeedName:string) => {
-
-        
+        removeFeed(FeedName);
   }
 
   return (
