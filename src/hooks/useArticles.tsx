@@ -109,7 +109,7 @@ const useArticles = (shouldFetch = false) => {
   }, [articles, search]);
 
   const getArticleFeed = (article: IArticle): IFeed => {
-    console.debug(article, feeds)
+    // console.debug(article, feeds)
     return feeds.find(
       (feed) => feed.name === article.feedName
     );
