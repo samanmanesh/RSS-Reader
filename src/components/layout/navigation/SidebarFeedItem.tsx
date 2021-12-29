@@ -49,7 +49,7 @@ export default function SidebarFeedItem(): ReactElement {
               href={`/feeds/${feed.name}`}
               key={feed.name}
             >
-              <button className="block w-full group">
+              <button className="block w-full group focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded-md">
                 <li
                   key={feed.link}
                   className={`${
@@ -97,13 +97,14 @@ export default function SidebarFeedItem(): ReactElement {
           <button
               onClick={closeModal}
               onKeyDown={onKeyDownHandler}
-              className="btn btn-lg btn-light bg-white text-gray-900 border-gray w-full text-center grid place-items-center"
+              className="btn btn-lg btn-light bg-white hover:bg-gray-100 border-gray-900 text-gray-900 focus:ring-red-500 w-full text-center grid place-items-center"
             >
               Cancel
             </button>
             <button
               onClick={removeFeedHandler}
-              className="btn btn-lg btn-light bg-red-500 text-white w-full text-center grid place-items-center"
+              // className="btn btn-lg btn-light bg-red-500 hover:bg-red-700 text-white border-gray-900 w-full text-center grid place-items-center"
+              className="btn-red btn-lg   w-full transition border-gray-900  "
             >
               Remove
             </button>
