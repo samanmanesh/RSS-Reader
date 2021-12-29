@@ -11,7 +11,6 @@ export default function useModal() {
   const openModal = () => {
     closeErrorState();
     setShowModal(true);
-    // setShowError(false);
   };
 
   const closeModal = () => {

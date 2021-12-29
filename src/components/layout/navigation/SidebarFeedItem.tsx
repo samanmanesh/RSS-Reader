@@ -33,7 +33,6 @@ export default function SidebarFeedItem(): ReactElement {
     }
   };
   const router = useRouter();
-  // const isActive = router.pathname === item.href;
 
   const checkIsActive = (feed: IFeed) => {
     const isActive =
@@ -94,7 +93,7 @@ export default function SidebarFeedItem(): ReactElement {
             item?
           </p>
           <div className="flex items-center space-x-4">
-          <button
+            <button
               onClick={closeModal}
               onKeyDown={onKeyDownHandler}
               className="btn btn-lg btn-light bg-white hover:bg-gray-100 border-gray-900 text-gray-900 focus:ring-red-500 w-full text-center grid place-items-center"
@@ -103,12 +102,10 @@ export default function SidebarFeedItem(): ReactElement {
             </button>
             <button
               onClick={removeFeedHandler}
-              // className="btn btn-lg btn-light bg-red-500 hover:bg-red-700 text-white border-gray-900 w-full text-center grid place-items-center"
               className="btn-red btn-lg   w-full transition border-gray-900  "
             >
               Remove
             </button>
-            
           </div>
         </div>
       </Modal>

@@ -82,7 +82,7 @@ const Sidebar = () => {
   useEffect(() => {
     if (!showModal) return;
     inputRef.current?.focus();
-  }, [showModal, inputRef])
+  }, [showModal, inputRef]);
 
   const cssTricksRSS =
     "https://css-tricks.com/feed/";
@@ -125,7 +125,6 @@ const Sidebar = () => {
       }
     });
   };
-
 
   return (
     <>

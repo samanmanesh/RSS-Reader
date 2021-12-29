@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { getRSSFeedData } from "../utils/rss.utils";
 import useArticles from "../hooks/useArticles";
 
+{/*
+//! this component is test and not relarted to the project
+*/}
 const podcastRSS =
   "https://feeds.acast.com/public/shows/5ea17537-f11f-4532-8202-294d976b9d5c";
 const joshRSS =
