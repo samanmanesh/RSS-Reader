@@ -96,13 +96,13 @@ export default function SidebarFeedItem(): ReactElement {
             <button
               onClick={closeModal}
               onKeyDown={onKeyDownHandler}
-              className="btn btn-lg btn-light bg-white hover:bg-gray-100 border-gray-900 text-gray-900 focus:ring-red-500 w-full text-center grid place-items-center"
+              className="btn btn-lg btn-light bg-white hover:bg-gray-100 border-gray-500 text-gray-900 focus:ring-indigo-500 w-full text-center grid place-items-center"
             >
               Cancel
             </button>
             <button
               onClick={removeFeedHandler}
-              className="btn-red btn-lg   w-full transition border-gray-900  "
+              className="btn-red btn-lg   w-full transition border-gray-500  "
             >
               Remove
             </button>
