@@ -26,7 +26,7 @@ export default function Modal({
     <Transition.Root show={show} as={Fragment}>
       <Dialog
         as="div"
-        className="fixed inset-0 z-40 grid place-items-center "
+        className="fixed inset-0 z-40 grid place-items-center mx-4"
         onClose={onClose}
       >
         <Transition.Child

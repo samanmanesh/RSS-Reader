@@ -40,5 +40,5 @@
 }
 
 .tag {
-  @apply inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium ;
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium flex-shrink-0;
 }

@@ -35,47 +35,50 @@ export default function SidebarFeedItem(): ReactElement {
   const router = useRouter();
   // const isActive = router.pathname === item.href;
 
-  const checkIsActive = (feed) => {
+  const checkIsActive = (feed: IFeed) => {
     const isActive =
       router.query.id === feed.name;
     return isActive;
   };
   return (
     <>
-      <ul className="p-2">
+      <ul className="p-2 space-y-2.5">
         {feeds.map((feed) => (
-          <section className="flex justify-between  group ">
+          <section className="flex">
             <Link
               href={`/feeds/${feed.name}`}
               key={feed.name}
             >
-              <li
-                key={feed.link}
-                // className="mb-2 p-1 pl-3 cursor-pointer flex items-center space-x-2 overflow-hidden"
-                className={`${
-                  checkIsActive(feed)
-                    ? "bg-gray-200"
-                    : "bg-white"
-                } mb-2 p-1 pl-3 cursor-pointer flex items-center space-x-2 overflow-hidden rounded-md w-full hover:bg-gray-100`}
-              >
-                <span
-                  className="w-2 h-2 rounded-full block flex-shrink-0"
-                  style={{
-                    backgroundColor:
-                      getFeedColor(feed),
-                  }}
-                />
-                <span className="truncate">
-                  {feed.name}
-                </span>
-              </li>
+              <button className="block w-full group">
+                <li
+                  key={feed.link}
+                  className={`${
+                    checkIsActive(feed)
+                      ? "bg-gray-200"
+                      : "bg-white"
+                  } p-1 pl-3 cursor-pointer flex items-center overflow-hidden rounded-md  hover:bg-gray-100 w-full`}
+                >
+                  <span
+                    className="w-2 h-2 rounded-full block flex-shrink-0 mr-2.5"
+                    style={{
+                      backgroundColor:
+                        getFeedColor(feed),
+                    }}
+                  />
+                  <span className="truncate">
+                    {feed.name}
+                  </span>
+                  <button
+                    className="ml-auto group"
+                    onClick={() =>
+                      openModal(feed.name)
+                    }
+                  >
+                    <TrashIcon className="opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition duration-250 ease-in-out h-5 w-5 text-gray-500 py-auto " />
+                  </button>
+                </li>
+              </button>
             </Link>
-            <button
-               className=" "
-              onClick={() => openModal(feed.name)}
-            >
-              <TrashIcon className="opacity-0 group-hover:opacity-100 transition duration-250 ease-in-out h-5 w-5 text-gray-500 py-auto " />
-            </button>
           </section>
         ))}
       </ul>

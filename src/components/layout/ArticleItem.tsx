@@ -34,7 +34,7 @@ export default function ArticleItem({
         ) : null}
         <div className="px-6 py-4">
           <div className="flex items-start justify-between gap-2">
-            <h1 className="text-2xl font-bold mb-2 text-left max-w-md">
+            <h1 className="text-lg leading-tight md:leading-relaxed md:text-2xl font-bold mb-2 text-left max-w-md">
               {item.title}
             </h1>
             <FeedTag
@@ -42,7 +42,7 @@ export default function ArticleItem({
             />
           </div>
           <div className="flex items-center justify-between">
-            <h2 className="text-md  mb-2 ">
+            <h2 className="mb-2 text-left">
               {/* Author Name */}
               <span
                 className="text-gray-600 font-medium"

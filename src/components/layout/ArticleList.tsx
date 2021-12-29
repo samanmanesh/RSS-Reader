@@ -9,7 +9,7 @@ export default function ArticleList({
   articles,
 }: Props): ReactElement {
   return (
-    <div className="space-y-6 mt-6">
+    <div className="space-y-6 mt-6 px-4">
       {articles.map((article) => (
         <ArticleItem
           key={article.id}
