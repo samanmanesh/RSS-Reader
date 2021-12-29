@@ -18,6 +18,7 @@ import {
   InboxIcon,
   MenuAlt2Icon,
   UsersIcon,
+  PlusIcon,
   XIcon,
 } from "@heroicons/react/outline";
 import { SearchIcon } from "@heroicons/react/solid";
@@ -259,9 +260,9 @@ const Sidebar = () => {
 
             <button
               onClick={openModal}
-              className="btn btn-lg btn-light mx-auto mb-6"
+              className="btn btn-lg btn-light mx-auto mb-6 text-sm"
             >
-              Add New Item
+              New Item <PlusIcon className="h-4 w-4 items-center ml-1" />
             </button>
           </div>
           <Modal
