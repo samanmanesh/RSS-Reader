@@ -12,7 +12,10 @@ const articleState = atom({
 
 const feedsState = atom({
   key: "feeds",
-  default: [],
+  default: [{
+    name: "css-tricks.com",
+    link: "https://css-tricks.com/feed/",
+  }],
 });
 
 const useArticles = (shouldFetch = false) => {
@@ -29,7 +32,13 @@ const useArticles = (shouldFetch = false) => {
     if (!shouldFetch) return;
     if (localFeeds && feeds.length === 0) {
       setFeeds(localFeeds);
-    }
+  
+    }else {
+        setFeeds(feeds);
+        setLocalFeeds(feeds);
+      }
+    
+    
   }, []);
 
   useEffect(() => {
