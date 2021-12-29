@@ -1,5 +1,6 @@
 import React, {
   useEffect,
+  useRef,
   useState,
 } from "react";
 import { Fragment } from "react";
@@ -64,6 +65,7 @@ const Sidebar = () => {
   const { articles, addFeed } = useArticles(true);
   const [selectNavItem, setSelectNavItem] =
     useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   // const [showError, setShowError] =
 
@@ -76,6 +78,11 @@ const Sidebar = () => {
   //     );
   //   }
   // }, []);
+
+  useEffect(() => {
+    if (!showModal) return;
+    inputRef.current?.focus();
+  }, [showModal, inputRef])
 
   const cssTricksRSS =
     "https://css-tricks.com/feed/";
@@ -118,6 +125,7 @@ const Sidebar = () => {
       }
     });
   };
+
 
   return (
     <>
@@ -206,7 +214,7 @@ const Sidebar = () => {
                 <span className=" rounded-md py-2 px-2  text-base font-medium">
                   Feeds
                 </span>
-                <SidebarFeedItem  />
+                <SidebarFeedItem />
               </section>
               <button
                 onClick={openModal}
@@ -264,39 +272,45 @@ const Sidebar = () => {
             show={showModal}
           >
             <>
-            <form onSubmit={handleGetFeed}>
-              <div className="flex flex-col  space-y-6 justify-items-center">
-                <label className="text-lg font-medium text-center">
-                  {" "}
-                  Enter a RSS URL{" "}
-                </label>
-                {showError && (
-                  <p
-                    className={`text-center text-red-600  `}
-                  >
+              <form onSubmit={handleGetFeed}>
+                <div className="flex flex-col  space-y-6 justify-items-center">
+                  <label className="text-lg font-medium text-center">
                     {" "}
-                    Invalid URL! <br /> Please
-                    enter a valid URL
-                  </p>
-                )}
-                <input
-                  type="text"
-                  onChange={inputHandler}
-                  value={rssUrl}
-                  className={` max-w-4xl mb-2 bg-gray-200 border-2  rounded-sm focus:outline-none focus:ring-1 
+                    Enter a RSS URL{" "}
+                  </label>
+                  {showError && (
+                    <p
+                      className={`text-center text-red-600  `}
+                    >
+                      {" "}
+                      Invalid URL! <br /> Please
+                      enter a valid URL
+                    </p>
+                  )}
+                  <input
+                    type="text"
+                    onChange={inputHandler}
+                    id="poo"
+                    value={rssUrl}
+                    ref={inputRef}
+                    className={` max-w-4xl mb-2 bg-gray-200 border-2  rounded-sm focus:outline-none focus:ring-1 
                   focus:ring-offset-2 focus:indigo-500 ${
                     showError && "text-red-500"
                   }`}
-                />
-                <input
-                  type="submit"
-                  className="btn btn-light btn-md w-full "
-                />
-                
-              </div>
-            </form>
-               <button onClick={closeModal} className="btn btn-light btn-md w-full mt-4 grid">Cancel</button>
-               </>
+                  />
+                  <input
+                    type="submit"
+                    className="btn btn-light btn-md w-full cursor-pointer "
+                  />
+                </div>
+              </form>
+              <button
+                onClick={closeModal}
+                className="btn btn-light btn-md bg-white border-indigo-500 hover:bg-gray-50 w-full mt-4 grid"
+              >
+                Cancel
+              </button>
+            </>
           </Modal>
         </div>
       </div>

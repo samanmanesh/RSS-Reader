@@ -94,19 +94,20 @@ export default function SidebarFeedItem(): ReactElement {
             item?
           </p>
           <div className="flex items-center space-x-4">
-            <button
-              onClick={removeFeedHandler}
-              className="btn btn-lg btn-light w-full text-center grid place-items-center"
-            >
-              Yes
-            </button>
-            <button
+          <button
               onClick={closeModal}
               onKeyDown={onKeyDownHandler}
-              className="btn btn-lg btn-light w-full text-center grid place-items-center"
+              className="btn btn-lg btn-light bg-white text-gray-900 border-gray w-full text-center grid place-items-center"
             >
-              No
+              Cancel
             </button>
+            <button
+              onClick={removeFeedHandler}
+              className="btn btn-lg btn-light bg-red-500 text-white w-full text-center grid place-items-center"
+            >
+              Remove
+            </button>
+            
           </div>
         </div>
       </Modal>
