@@ -16,6 +16,7 @@ function MyApp({
           name="viewport"
           content="initial-scale=1.0, width=device-width"
         />
+        <meta property="og:image" content="https://rss-reader-ten-chi.vercel.app/RSS-Reader.png" />
       </Head>
       <RecoilRoot>
         <AppLayout>
