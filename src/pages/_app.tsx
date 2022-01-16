@@ -11,7 +11,7 @@ function MyApp({
   return (
     <>
       <Head>
-        <title>NextJS TW</title>
+        <title>RSSReader</title>
         <meta
           name="viewport"
           content="initial-scale=1.0, width=device-width"
